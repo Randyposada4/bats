@@ -1,12 +1,16 @@
 ---
-title: "report"
+title: " Summer Research Project: Bats "
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{report}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
+highlight: Tango
+theme: Sandstone
 ---
 
+***
+#### *By Randy Posada*
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
@@ -14,6 +18,34 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
-library(bats)
+```{r setup, include= FALSE}
+library(rotl)
+
 ```
+
+```{r out.width = "100%",out.height= "50%", fig.align = "center", echo=FALSE }
+
+knitr::include_graphics("C:/Users/randy/OneDrive/Desktop/bats/images/Batphoto1.jpg")
+```
+
+***
+
+# **My Report**
+
+## *Overview*
+
+  In this report I use the OpenTree of life alongside Physcraper to create and access an updated phylogentic tree of all bats.
+
+  There are over 1000 different species of bats. These extraordinary flying mammals use their hands to fly; granted their order name *chiroptera*, which translates in Greek to 'Hand Wings'. Each of their fingers are connected to one another through a thin layer of skin which allows these nocturnal mammals to take off into flight. Chiroptera are the only mammals with the capability of continued flight. 
+
+***
+
+```{r}
+
+
+
+```
+
+
+
+
