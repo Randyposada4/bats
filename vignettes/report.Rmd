@@ -24,10 +24,13 @@ library(rotl)
 ```
 
 ```{r out.width = "100%",out.height= "50%", fig.align = "center", echo=FALSE }
-
-knitr::include_graphics("C:/Users/randy/OneDrive/Desktop/bats/images/Batphoto1.jpg")
+knitr::include_graphics("../images/Batphoto1.jpg")
 ```
 
+```{r}
+getwd()
+
+```
 ***
 
 # **My Report**
@@ -43,6 +46,14 @@ knitr::include_graphics("C:/Users/randy/OneDrive/Desktop/bats/images/Batphoto1.j
 ```{r}
 
 
+
+```
+
+```{bash}
+# print "hello Randy"
+```
+
+```{bash}
 
 ```
 
