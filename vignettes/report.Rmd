@@ -84,6 +84,7 @@ rotl::tol_about()
 ```{r}
 chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
 
+
 list(chiroptera_ott_id)
 ```
 
@@ -91,22 +92,20 @@ list(chiroptera_ott_id)
 chiroptera_ott_id
 ```
 
+
+
 ```{r}
-chiroptera_subtree <- rotl::tol_subtree(ott_id = resolved_names["chiroptera",]$574724)
+chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
+```
+
+
+```{r}
+rotl::is_in_tree(chiroptera_ott_id)
 
 ```
 
 ```{r}
-subtree <- rotl::tol_subtree(resolved_names["chiroptera",]$ott_id)
-```
-
-```{r}
-rotl::is_in_tree(resolved_names["chiroptera",]$ott_id)
-
-```
-
-```{r}
-chiroptera_node_info <- rotl::tol_node_info(resolved_names["Chiroptera",]$ott_id)
+chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
 ```
 
@@ -118,9 +117,9 @@ ape::plot.phylo(my_tree, cex = 2) # or just plot(my_tree, cex = 2)
 ```
 
 ```{r}
-chiroptera_families <- datelife::get_ott_children(ott_ids = resolved_names["Chiroptera",]$ott_id, ott_rank = "family")
+chiroptera_families <- datelife::get_ott_children(chiroptera_ott_id, ott_rank = "family")
 
-amphibia_families_subtree <- rotl::tol_induced_subtree(amphibia_families$Amphibia$ott_id)
+chiroptera_ott_id
 ```
 
 # notes for luna 
