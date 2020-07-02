@@ -90,8 +90,10 @@ chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
 
 ape::Ntip(chiroptera_subtree)
 
-ape::plot.phylo(my_tree, cex = 0.1, type = "fan") # or just plot(my_tree, cex = 0.1)
-
+ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan") # or just plot(my_tree, cex = 0.1)
+# because it ha sno branch lengths, it does not plot pretty. We have to get branch lengths for it.
+# One way way to do this is to use datelife::datelife_search()
+# Another way to do it is to make up teh branch lengths with ape::compute.brlen()
 ```
 
 This will tell you if the taxon is monophyletic:
@@ -104,22 +106,23 @@ chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
 ```
 
-Make a samller tree of chiroptera families:
+First task: Get and plot a tree of chiroptera families:
 ```{r}
 chiroptera_families <- datelife::get_ott_children(ott_ids = chiroptera_ott_id, ott_rank = "family")
 ls(chiroptera_families)
+chiroptera_families
 ```
 Figure out how to get the ott ids as a vector.
 
-Make a smaller bat tree with 5 taxa that you like:
+```{r inculde= FALSE}
+# my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
+
+# and plot the induced subtree
+```
+
+Task 2: Get an even smaller bat tree with 5 taxa that you like:
 First get the scientific names of families, genera or species of bats.
 Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
-
-```{r inculde= FALSE}
-my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
-
-
-```
 
 
 
