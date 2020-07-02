@@ -19,8 +19,15 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, include= FALSE}
-library(rotl)
+install.packages("ape")
+install.packages("phyloch")
+install.packages("devtools")
 
+library(rotl)
+library(devtools)
+library(stringr)
+devtools::install_github("phylotastic/datelife")
+library(datelife)
 ```
 
 ```{r out.width = "100%",out.height= "50%", fig.align = "center", echo=FALSE }
@@ -43,19 +50,6 @@ getwd()
 
 ***
 
-```{r Setup}
-
-install.packages("ape")
-install.packages("phyloch")
-install.packages("devtools")
-
- library(rotl)
-library(devtools)
-library(stringr)
-devtools::install_github("phylotastic/datelife")
-library(datelife)
-
-```
 
 ```{r}
 
@@ -78,30 +72,31 @@ resolved_names[1,]
 ```{r}
 resolved_names[1,"unique_name"]
 ```
+
+This gives all info from the current OpenTree synthetic tree
 ```{r}
 rotl::tol_about()
 ```
+
+This gets Chiroptera OTT id:
 ```{r}
 chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
-
-
-list(chiroptera_ott_id)
-```
-
-```{r}
 chiroptera_ott_id
 ```
 
 
-
 ```{r}
 chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
+
+ape::Ntip(chiroptera_subtree)
+
+ape::plot.phylo(my_tree, cex = 0.1, type = "fan") # or just plot(my_tree, cex = 0.1)
+
 ```
 
-
+This will tell you if the taxon is monophyletic:
 ```{r}
-rotl::is_in_tree(chiroptera_ott_id)
-
+rotl::is_in_tree(chiroptera_ott_id) 
 ```
 
 ```{r}
@@ -109,18 +104,24 @@ chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
 ```
 
-```{r inculde= FALSE}
-my_tree <- rotl::tol_induced_subtree(chiroptera_ott_id)
-
-
-ape::plot.phylo(my_tree, cex = 2) # or just plot(my_tree, cex = 2)
-```
-
+Make a samller tree of chiroptera families:
 ```{r}
-chiroptera_families <- datelife::get_ott_children(chiroptera_ott_id, ott_rank = "family")
-
-chiroptera_ott_id
+chiroptera_families <- datelife::get_ott_children(ott_ids = chiroptera_ott_id, ott_rank = "family")
+ls(chiroptera_families)
 ```
+Figure out how to get the ott ids as a vector.
+
+Make a smaller bat tree with 5 taxa that you like:
+First get the scientific names of families, genera or species of bats.
+Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
+
+```{r inculde= FALSE}
+my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
+
+
+```
+
+
 
 # notes for luna 
   need help with 
