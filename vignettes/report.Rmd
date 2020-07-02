@@ -43,20 +43,69 @@ getwd()
 
 ***
 
+```{r Setup}
+
+install.packages("ape")
+install.packages("phyloch")
+install.packages("devtools")
+
+ library(rotl)
+library(devtools)
+library(stringr)
+devtools::install_github("phylotastic/datelife")
+library(datelife)
+
+```
+
 ```{r}
 
+my_taxa <- c("chiroptera")
+resolved_names <- rotl::tnrs_match_names(names = my_taxa)
 
-
-```
-
-```{bash}
-# print "hello Randy"
-```
-
-```{bash}
+resolved_names
 
 ```
 
+```{r}
+class(resolved_names)
+
+
+```
+```{r}
+resolved_names[1,]
+
+```
+```{r}
+resolved_names[1,"unique_name"]
+```
+```{r}
+rotl::tol_about()
+```
+```{r}
+chiroptera_ott_id <- rotl::tnrs_match_names("chiroptera")$ott_id
+```
+
+```{r}
+chiroptera_ott_id
+```
+```{r}
+chiroptera_subtree <- rotl::tol_subtree(ott_id = resolved_names["Chiroptera",]$ott_id)
+```
+```{r}
+subtree <- rotl::tol_subtree(resolved_names["chiroptera",]$ott_id)
+```
+
+```{r}
+rotl::is_in_tree(resolved_names["chiroptera",]$ott_id)
+
+```
+```{r}
+chiroptera_node_info <- rotl::tol_node_info(resolved_names["Chiroptera",]$ott_id)
+chiroptera_node_info
+```
 
 
 
+
+# Attributions
+[bat image](https://unsplash.com/photos/hNz4Qh9ECCc)
