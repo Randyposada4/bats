@@ -19,14 +19,9 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup, include= FALSE}
-install.packages("ape")
-install.packages("phyloch")
-install.packages("devtools")
-
 library(rotl)
 library(devtools)
 library(stringr)
-devtools::install_github("phylotastic/datelife")
 library(datelife)
 ```
 
@@ -91,7 +86,8 @@ chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
 
 ape::Ntip(chiroptera_subtree)
 
-ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan") # or just plot(my_tree, cex = 0.1)
+ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan") 
+# or just plot(my_tree, cex = 0.1)
 # because it ha sno branch lengths, it does not plot pretty. We have to get branch lengths for it.
 # One way way to do this is to use datelife::datelife_search()
 # Another way to do it is to make up teh branch lengths with ape::compute.brlen()
@@ -126,6 +122,12 @@ ape::plot.phylo(chiroptera_families_subtree, cex = .8)
 
 Figure out how to get the ott ids as a vector.
 
+```{r include=FALSE}
+library(rmarkdown)
+render("vignettes/report.Rmd", output_format="pdf")
+```
+
+
 ```{r}
 chiroptera_families$Chiroptera$ott_id
 ```
@@ -148,16 +150,15 @@ First get the scientific names of families, genera or species of bats.
 Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
 
 ```{r}
-
-```
-
-
-```{r}
-my_ott_ids <- rotl::tnrs_match_names(names = "Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae")
+my_ott_ids <- rotl::tnrs_match_names(c("Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae"))
 ```
 
 ```{r}
-my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
+my_ott_ids
+```
+
+```{r}
+my_tree <- rotl::tol_induced_subtree(my_ott_ids$ott_id)
 ```
 
 ```{r}
@@ -165,7 +166,7 @@ my_tree
 ```
 
 ```{r}
-ape::plot.phylo(my_tree, cex = 2)
+ape::plot.phylo(my_tree, cex = 1)
 ```
 
 
