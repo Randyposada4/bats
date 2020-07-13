@@ -69,6 +69,7 @@ class(resolved_names)
 resolved_names[1,]
 
 ```
+
 ```{r}
 resolved_names[1,"unique_name"]
 ```
@@ -112,9 +113,31 @@ chiroptera_families <- datelife::get_ott_children(ott_ids = chiroptera_ott_id, o
 ls(chiroptera_families)
 chiroptera_families
 ```
+
+```{r Using Chiroptera Families to create tree}
+chiroptera_families_subtree <- rotl::tol_induced_subtree(chiroptera_families$Chiroptera$ott_id)
+```
+```{r Observing Tree Info}
+chiroptera_families_subtree
+```
+```{r Plotting Tree Of Chiroptera Families}
+ape::plot.phylo(chiroptera_families_subtree, cex = .8)
+```
+
 Figure out how to get the ott ids as a vector.
 
-```{r inculde= FALSE}
+```{r}
+chiroptera_families$Chiroptera$ott_id
+```
+
+```{r}
+c(chiroptera_families$Chiroptera$ott_id)
+```
+```{r}
+
+```
+
+```{r, inculde= FALSE}
 # my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
 
 # and plot the induced subtree
@@ -124,16 +147,37 @@ Task 2: Get an even smaller bat tree with 5 taxa that you like:
 First get the scientific names of families, genera or species of bats.
 Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
 
+```{r}
+
+```
 
 
-# notes for luna 
-  need help with 
-  - NA values
-  - checking resolved names, maybe typo
-  - help finalizing tree
-  - won let me knit the data
-  - git hub "m"
-                
+```{r}
+my_ott_ids <- rotl::tnrs_match_names(names = "Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae")
+```
+
+```{r}
+my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
+```
+
+```{r}
+my_tree
+```
+
+```{r}
+ape::plot.phylo(my_tree, cex = 2)
+```
+
+
+
+
+
+
+
+
+
+
+
 
 # Attributions
 [bat image](https://unsplash.com/photos/hNz4Qh9ECCc)
