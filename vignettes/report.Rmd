@@ -122,8 +122,8 @@ ape::plot.phylo(chiroptera_families_subtree, cex = .8)
 
 Figure out how to get the ott ids as a vector.
 
-```{r include=FALSE}
-
+```{r include=FALSE, eval=hjjjFALSE}
+rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
 ```
 
 
@@ -164,15 +164,44 @@ my_tree
 ape::plot.phylo(my_tree, cex = 1)
 ```
 
+```{r A look At properties in the OTOL database}
+rotl::studies_properties()
+```
 
+```{r}
+chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "Chiroptera")
+chiroptera_node_subtree
+```
 
+```{r Datelife Function}
+chiroptera_dr <- datelife::get_datelife_result(chiroptera_node_subtree)
+```
 
+```{r}
+names(chiroptera_dr)
+```
 
+```{r To get Chronograms}
+chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
+```
 
+```{r Plotting Tree}
+datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+```
 
+```{r}
+chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
+Chiroptera_phylo_median
+```
 
-
+```{r Plotting Chronogram}
+ape::plot.phylo(Chiroptera_phylo_median, cex = 1.2)
+# Add the time axis:
+ape::axisPhylo()
+# And a little hack to add the axis name:
+graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo",envir = .PlotPhyloEnv)$xx) * 0.5)
+```
 
 
 # Attributions
