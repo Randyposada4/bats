@@ -165,6 +165,7 @@ Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
 my_ott_ids <- rotl::tnrs_match_names(c("Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae"))
 ```
 
+You will need to extract the ott ids only, because now you have the whole table
 ```{r}
 my_ott_ids
 ```
@@ -181,10 +182,17 @@ my_tree
 ape::plot.phylo(my_tree, cex = 1)
 ```
 
-A look At properties in the OTOL database
-```{r }
-rotl::studies_properties()
-```
+GET THE NODE AGES FOR YOUR 5 TAXA TREE:
+GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.
+
+datelife::get_datelife_result
+
+datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
+
+datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+
+***
+
 
 ```{r}
 chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "name")
