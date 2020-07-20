@@ -11,14 +11,12 @@ theme: Sandstone
 
 ***
 #### *By Randy Posada*
-```{r, include = FALSE}
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
-```
 
-```{r setup, include= FALSE}
 library(rotl)
 library(devtools)
 library(stringr)
@@ -29,24 +27,21 @@ library(datelife)
 knitr::include_graphics("../images/Batphoto1.jpg")
 ```
 *Fig.cap="[See attributions for link](#Attributions)*
-```{r include=FALSE}
-getwd()
 
-```
 ***
 
 # **My Report**
 
 ## *Overview*
 
-  In this report I use the OpenTree of life alongside Physcraper to create and access an updated phylogentic tree of all bats.
+  In this report I use the Open Tree of Life alongside Physcraper to create and access an updated phylogentic tree of all bats.
 
-  There are over 1000 different species of bats. These extraordinary flying mammals use their hands to fly; granted their order name *chiroptera*, which translates in Greek to 'Hand Wings'. Each of their fingers are connected to one another through a thin layer of skin which allows these nocturnal mammals to take off into flight. Chiroptera are the only mammals with the capability of continued flight. 
+  There are over 1000 different species of bats. These extraordinary flying mammals use their hands to fly; granted their order name *chiroptera*, which translates in Greek to 'Hand Wings'. Each of their fingers are connected to one another through a thin layer of skin which allows these nocturnal mammals to take off into flight. Chiroptera are the only mammals with the capability of continued flight.
 
 ***
 
 
-```{r}
+```{r get_names}
 
 my_taxa <- c("chiroptera")
 resolved_names <- rotl::tnrs_match_names(names = my_taxa)
@@ -55,24 +50,36 @@ resolved_names
 
 ```
 
+WHY IS IT RELEVANT/USEFUL TO KNOW THE CLASS OF AN OBJECT?
+
 ```{r}
 class(resolved_names)
 
-
 ```
+DESCRIBE THE CLASS OF THE resolved_names OBJECT
+EXPLAIN WHY DO YOU SUBSET LIKE TYHE FOLLOWING CHUNK, AND WHY YOU WANT TO SUBSET.
+WHAT'S THE GOAL OF SUBSETTING?
+
 ```{r}
 resolved_names[1,]
 
 ```
+THIS IS PART OF THE PREVIOUS CHUNK. THE GOAL IS TO GET THE OTT ID OF CHIROPTERA
+
+ALSO EXPLAIN WHAT THE OTT ID IS
+
+IF YOU WANT TO KEEP THE FOLLOWING CHUNK, EXPLAIN WHAT THE UNIQUE NAME IDENTIFIER
+MEANS FOR THE OPEN TREE OF LIFE.
 
 ```{r}
 resolved_names[1,"unique_name"]
 ```
 
-This gives all info from the current OpenTree synthetic tree
+The next code gives all info from the current OpenTree synthetic tree
 ```{r}
 rotl::tol_about()
 ```
+DESCRIBE THE OUTPUT OF THE PREVIOUS CODE
 
 This gets Chiroptera OTT id:
 ```{r}
@@ -80,13 +87,16 @@ chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
 chiroptera_ott_id
 ```
 
+EXPLAIN HERE WHAT THE FOLLOWING SUBTREE IS
+
+And the following code will help us get a subtree:
 
 ```{r}
 chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
 
 ape::Ntip(chiroptera_subtree)
 
-ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan") 
+ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan")
 # or just plot(my_tree, cex = 0.1)
 # because it ha sno branch lengths, it does not plot pretty. We have to get branch lengths for it.
 # One way way to do this is to use datelife::datelife_search()
@@ -94,9 +104,14 @@ ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan")
 ```
 
 This will tell you if the taxon is monophyletic:
+
+EXPLAIN HERE WHY IS IT RELEVANT THAT THE TAXON IS monophyletic?
+
 ```{r}
-rotl::is_in_tree(chiroptera_ott_id) 
+rotl::is_in_tree(chiroptera_ott_id)
 ```
+
+WHY DO WE NEED THE NODE OF THE TAXON
 
 ```{r}
 chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
@@ -110,22 +125,24 @@ ls(chiroptera_families)
 chiroptera_families
 ```
 
-```{r Using Chiroptera Families to create tree}
+Using Chiroptera Families to create tree
+```{r families}
 chiroptera_families_subtree <- rotl::tol_induced_subtree(chiroptera_families$Chiroptera$ott_id)
 ```
-```{r Observing Tree Info}
+
+Observing Tree Info
+
+```{r tree_info}
 chiroptera_families_subtree
 ```
-```{r Plotting Tree Of Chiroptera Families}
-ape::plot.phylo(chiroptera_families_subtree, cex = .8)
+
+Plotting Tree Of Chiroptera Families
+
+```{r plot_subtree1}
+ape::plot.phylo(chiroptera_families_subtree, cex = 0.8)
 ```
 
 Figure out how to get the ott ids as a vector.
-
-```{r include=FALSE, eval=hjjjFALSE}
-rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
-```
-
 
 ```{r}
 chiroptera_families$Chiroptera$ott_id
@@ -164,7 +181,8 @@ my_tree
 ape::plot.phylo(my_tree, cex = 1)
 ```
 
-```{r A look At properties in the OTOL database}
+A look At properties in the OTOL database
+```{r }
 rotl::studies_properties()
 ```
 
@@ -172,37 +190,53 @@ rotl::studies_properties()
 chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "Chiroptera")
 chiroptera_node_subtree
 ```
+Datelife Functions
 
-```{r Datelife Function}
+```{r }
 chiroptera_dr <- datelife::get_datelife_result(chiroptera_node_subtree)
 ```
 
 ```{r}
 names(chiroptera_dr)
 ```
-
-```{r To get Chronograms}
+To get Chronograms
+```{r }
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
 ```
-
-```{r Plotting Tree}
+Plotting Tree with ages
+```{r }
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
+
+Summarizing node ages
 
 ```{r}
 chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
-Chiroptera_phylo_median
+chiroptera_phylo_median
 ```
 
-```{r Plotting Chronogram}
-ape::plot.phylo(Chiroptera_phylo_median, cex = 1.2)
+Plotting Chronogram
+```{r }
+ape::plot.phylo(chiroptera_phylo_median, cex = 1.2)
 # Add the time axis:
 ape::axisPhylo()
 # And a little hack to add the axis name:
 graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo",envir = .PlotPhyloEnv)$xx) * 0.5)
 ```
 
+# running python
+
+
+# Reproducibility
+
+Do you want to reproduce this repory yourself?
+
+The following piece of code will render this report as pdf:
+
+```{r include=FALSE, eval=FALSE}
+rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
+```
 
 # Attributions
 [bat image](https://unsplash.com/photos/hNz4Qh9ECCc)
