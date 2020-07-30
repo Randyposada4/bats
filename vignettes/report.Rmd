@@ -56,7 +56,7 @@ class(resolved_names)
 
 ```
 
-  The class of the resolved_names object allows us to view the search string name, the unique name ,and the ott_id in respect to the open tree of life. The class of the  resolved_names object which includes trns_match_names, allows us to view two outputs : "match_names" and "data_frame"
+  The class of the resolved_names object allows us to view the search string name, the unique name ,and the ott_id in respect to the open tree of life. The class of the  resolved_names object which includes 'trns_match_names', allows us to view two outputs : "match_names" and "data_frame"
 
   In the following chunk, We can subset to obtain certain columns and and if needed, manipulate the formula to extract a specific component from the row. Since there is no function that allows us to extract the values from a row of math_names, we need to use resolved names and indexing. Subsetting ultimately allows us to get values from all columns of one row.
 
@@ -66,28 +66,25 @@ resolved_names[1,]
 ```
 This is part of the previous chunk.
 
-Our goal is to obtain the ott_id for bats (chiroptera). In order to extract the information we need to subset using the column name 'unique_name' in the second part of the formula 'resolved_names'. This way, we can extract one specific value ( ) from the column we want using the column name.
+  Our goal is to obtain the ott_id for bats (Chiroptera). In order to extract the information we need to subset using the column name 'unique_name' in the second part of the formula 'resolved_names'. This way, we can extract one specific value ( ) from the column we want using the column name.
 
-ALSO EXPLAIN WHAT THE OTT ID IS
-An OTT id is a unique numerical identifier assigned to a taxon in the Open Tree Taxonomy. Every raxon has a specific OTT id. These OTT ids allow us to interact with the Open Tree of Life.
+  An OTT id is a unique numerical identifier assigned to a taxon in the Open Tree Taxonomy. Every taxon has a specific OTT id. These OTT ids allow us to interact with the Open Tree of Life.
 
-IF YOU WANT TO KEEP THE FOLLOWING CHUNK, EXPLAIN WHAT THE UNIQUE NAME IDENTIFIER
-MEANS FOR THE OPEN TREE OF LIFE.
+  If we want to obtain the unique name of the taxon used in the synthetic open tree of life, we can use the following function. This function takes into account our previous output of data and extract a specific value. 
 
 ```{r Obatining_The_Value_of_a_Specific_Column}
 resolved_names[1,"unique_name"]
 ```
 
-The next code gives all info from the current synthetic open tree:
-```{r}
+The next code gives all info from the current synthetic Open Tree:
+```{r Obtaining_Info_From_The_OTOL}
 rotl::tol_about()
 ```
-DESCRIBE THE OUTPUT OF THE PREVIOUS CODE
 
-The previous code gave an output of the information from the Synthetic Opent Tree of Life (OTOL)
+The previous code gave an output of the information from the Synthetic Opent Tree of Life (OTOL) using the package 'rotl'
 
-This function assigns our matched name 'chiroptera' to hiroptera_ott_id and will therefore extract the ott_id we wanted for chiroptera once we run it.
-```{r}
+This function assigns our matched name 'chiroptera' to "Chiroptera_ott_id" and will therefore extract the ott_id we wanted for chiroptera once we run it.
+```{r Acquiring_the_ott_id}
 chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
 chiroptera_ott_id
 ```
@@ -110,21 +107,21 @@ ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan")
 
 This will tell you if the taxon is monophyletic:
 
-EXPLAIN HERE WHY IS IT RELEVANT THAT THE TAXON IS monophyletic?
-
+It is relevant that our taxon is monophyletic since nonmonophyletic taxon contain 'invalid' or 'broken' data. When the taxon is 'broken', its ott_id is not assidigned to a node in the synthetic tree.
 ```{r}
 rotl::is_in_tree(chiroptera_ott_id)
 ```
+the Above code confirmed that indeed our taxon is monophyletic by giviing the output 'TRUE'
 
-WHY DO WE NEED THE NODE OF THE TAXON
-
-```{r}
+WHY DO WE NEED THE NODE OF THE TAXON  #ask luna if okay 
+Ott_ids and Node ids allow us to interact with the synthetic OTOL.
+```{r Getting_Node_info}
 chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
 ```
 
 First task: Get and plot a tree of chiroptera families:
-```{r}
+```{r Assigning_Chiroptera_Families}
 chiroptera_families <- datelife::get_ott_children(ott_ids = chiroptera_ott_id, ott_rank = "family")
 ls(chiroptera_families)
 chiroptera_families
@@ -149,11 +146,11 @@ ape::plot.phylo(chiroptera_families_subtree, cex = 0.8)
 
 Figure out how to get the ott ids as a vector.
 
-```{r}
+```{r Vector1}
 chiroptera_families$Chiroptera$ott_id
 ```
 
-```{r}
+```{r }
 c(chiroptera_families$Chiroptera$ott_id)
 ```
 ```{r, inculde= FALSE}
@@ -166,24 +163,24 @@ Task 2: Get an even smaller bat tree with 5 taxa that you like:
 First get the scientific names of families, genera or species of bats.
 Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
 
-```{r}
+```{r Assigning_to_my_ott_ids}
 my_ott_ids <- rotl::tnrs_match_names(c("Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae"))
 ```
 
 You will need to extract the ott ids only, because now you have the whole table
-```{r}
+```{r Displaying_Ott_ids}
 my_ott_ids
 ```
 
-```{r}
+```{r Assigning_my_tree}
 my_tree <- rotl::tol_induced_subtree(my_ott_ids$ott_id)
 ```
 
-```{r}
+```{r Info_on_My_Tree}
 my_tree
 ```
 
-```{r}
+```{r Plotting_my_tree}
 ape::plot.phylo(my_tree, cex = 1)
 ```
 
@@ -196,49 +193,56 @@ datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format 
 
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 
-***
+```{r}
+datelife::get_datelife_result
 
+datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
+
+datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+```
+
+***
 
 ```{r}
 chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "name")
 head(chiroptera_node_subtree$tip.label)
 ```
-Datelife Functions
+*Datelife Functions*
 
-When you run the get datelife result function it will get node ages from published trees that contain at least two taxa from your search:
+When you run the get datelife result function it will give node ages from published trees that contain at least two taxa from your search:
 
-```{r }
+```{r Assigning_chiroptera_dr}
 chiroptera_dr <- datelife::get_datelife_result(chiroptera_node_subtree)
 ```
 
-The datelife result object is not a tree but a list of tables with bthe node ages for each pair od taxa from your search.
+The datelife result object is not a tree but a list of tables with the node ages for each pair of taxa from your search.
 For our 1800 species in the Chiroptera, we got the following trees with node ages:
-```{r}
+```{r Obtaining_Studies}
 names(chiroptera_dr)
 ```
 
-We have 7 studies in OpenTree with ages for the Chiroptera
+We have 7 studies in OpenTree with ages for the Chiroptera. The code above provided all references of the seven studies as an output.
 
 To get the actual chronograms we need to run another function:
 ```{r }
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
 ```
 
-Plotting Tree with ages
-```{r }
+the following function will allow us to plot the Tree with the ages.
+```{r Tree_With_Ages}
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
 
 Summarizing node ages
-
-```{r}
+```{r Node_age_Summary}
 chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
 chiroptera_phylo_median
 ```
 
+To plot the chronogram, 
 Plotting Chronogram
-```{r }
+```{r Plotting_Chronogram }
 ape::plot.phylo(chiroptera_phylo_median, cex = 1.2)
 # Add the time axis:
 ape::axisPhylo()
@@ -251,7 +255,7 @@ graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo
 
 # Reproducibility
 
-Do you want to reproduce this repory yourself?
+Do you want to reproduce this report yourself?
 
 The following piece of code will render this report as pdf:
 
