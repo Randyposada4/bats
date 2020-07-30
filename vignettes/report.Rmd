@@ -224,15 +224,24 @@ names(chiroptera_dr)
 We have 7 studies in OpenTree with ages for the Chiroptera. The code above provided all references of the seven studies as an output.
 
 To get the actual chronograms we need to run another function:
-```{r }
+```{r getting_phylo_all, eval=FALSE}
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
+# We will write this object into a file, bc it takes a long time to run
 save(chiroptera_phylo_all, file="data/chiroptera_phylo_all.RData")
 ```
 
-the following function will allow us to plot the Tree with the ages.
-```{r Tree_With_Ages}
-datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+Now, we have to load it into the R work space so it is available for the next part
+
+```{r loading_phylo_all}
+load("data/chiroptera_phylo_all.RData")
 ```
+
+
+The following function will allow us to plot the Tree with the ages.
+```{r Tree_With_Ages}
+datelife::plot_phylo_all(trees = chiroptera_phylo_all, write="pdf")
+```
+However, they are quite large, so we will not show them here for now.
 
 Summarizing node ages
 ```{r Node_age_Summary}
