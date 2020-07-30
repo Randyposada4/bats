@@ -50,7 +50,7 @@ resolved_names
 ```
 
   It is useful to know the class of an object since it makes manipulating objects much easier with different functions.When we create a class we create a data structure that will house all the objects that belong to a specific class. THis is done for  ease of access, organization, and clarity.
-  
+
 ```{r Checking_class_of_an_object}
 class(resolved_names)
 
@@ -70,7 +70,7 @@ This is part of the previous chunk.
 
   An OTT id is a unique numerical identifier assigned to a taxon in the Open Tree Taxonomy. Every taxon has a specific OTT id. These OTT ids allow us to interact with the Open Tree of Life.
 
-  If we want to obtain the unique name of the taxon used in the synthetic open tree of life, we can use the following function. This function takes into account our previous output of data and extract a specific value. 
+  If we want to obtain the unique name of the taxon used in the synthetic open tree of life, we can use the following function. This function takes into account our previous output of data and extract a specific value.
 
 ```{r Obatining_The_Value_of_a_Specific_Column}
 resolved_names[1,"unique_name"]
@@ -93,7 +93,7 @@ EXPLAIN HERE WHAT THE FOLLOWING SUBTREE IS
 
 The following code will help us get a subtree:
 
-```{r Obtaining_a_Subtree warning=FALSE}
+```{r Obtaining_a_Subtree, warning=FALSE}
 chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
 
 ape::Ntip(chiroptera_subtree)
@@ -111,10 +111,10 @@ It is relevant that our taxon is monophyletic since nonmonophyletic taxon contai
 ```{r}
 rotl::is_in_tree(chiroptera_ott_id)
 ```
-the Above code confirmed that indeed our taxon is monophyletic by giviing the output 'TRUE'
+The above code confirmed that indeed our taxon is monophyletic by giving the output 'TRUE'
 
-WHY DO WE NEED THE NODE OF THE TAXON  #ask luna if okay 
-Ott_ids and Node ids allow us to interact with the synthetic OTOL.
+WHY DO WE NEED THE NODE OF THE TAXON  #ask luna if okay
+OTT ids and node ids allow us to interact with the synthetic OTOL.
 ```{r Getting_Node_info}
 chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
@@ -226,6 +226,7 @@ We have 7 studies in OpenTree with ages for the Chiroptera. The code above provi
 To get the actual chronograms we need to run another function:
 ```{r }
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
+save(chiroptera_phylo_all, file="data/chiroptera_phylo_all.RData")
 ```
 
 the following function will allow us to plot the Tree with the ages.
@@ -240,7 +241,7 @@ chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, s
 chiroptera_phylo_median
 ```
 
-To plot the chronogram, 
+To plot the chronogram,
 Plotting Chronogram
 ```{r Plotting_Chronogram }
 ape::plot.phylo(chiroptera_phylo_median, cex = 1.2)
