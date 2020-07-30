@@ -40,7 +40,6 @@ knitr::include_graphics("../images/Batphoto1.jpg")
 
 ***
 
-
 ```{r get_names}
 
 my_taxa <- c("chiroptera")
@@ -50,38 +49,44 @@ resolved_names
 
 ```
 
-WHY IS IT RELEVANT/USEFUL TO KNOW THE CLASS OF AN OBJECT?
-
-```{r}
+  It is useful to know the class of an object since it makes manipulating objects much easier with different functions.When we create a class we create a data structure that will house all the objects that belong to a specific class. THis is done for  ease of access, organization, and clarity.
+  
+```{r Checking_class_of_an_object}
 class(resolved_names)
 
 ```
-DESCRIBE THE CLASS OF THE resolved_names OBJECT
-EXPLAIN WHY DO YOU SUBSET LIKE TYHE FOLLOWING CHUNK, AND WHY YOU WANT TO SUBSET.
-WHAT'S THE GOAL OF SUBSETTING?
 
-```{r}
+  The class of the resolved_names object allows us to view the search string name, the unique name ,and the ott_id in respect to the open tree of life. The class of the  resolved_names object which includes trns_match_names, allows us to view two outputs : "match_names" and "data_frame"
+
+  In the following chunk, We can subset to obtain certain columns and and if needed, manipulate the formula to extract a specific component from the row. Since there is no function that allows us to extract the values from a row of math_names, we need to use resolved names and indexing. Subsetting ultimately allows us to get values from all columns of one row.
+
+```{r Obtaining_row_values}
 resolved_names[1,]
 
 ```
-THIS IS PART OF THE PREVIOUS CHUNK. THE GOAL IS TO GET THE OTT ID OF CHIROPTERA
+This is part of the previous chunk.
+
+Our goal is to obtain the ott_id for bats (chiroptera). In order to extract the information we need to subset using the column name 'unique_name' in the second part of the formula 'resolved_names'. This way, we can extract one specific value ( ) from the column we want using the column name.
 
 ALSO EXPLAIN WHAT THE OTT ID IS
+An OTT id is a unique numerical identifier assigned to a taxon in the Open Tree Taxonomy. Every raxon has a specific OTT id. These OTT ids allow us to interact with the Open Tree of Life.
 
 IF YOU WANT TO KEEP THE FOLLOWING CHUNK, EXPLAIN WHAT THE UNIQUE NAME IDENTIFIER
 MEANS FOR THE OPEN TREE OF LIFE.
 
-```{r}
+```{r Obatining_The_Value_of_a_Specific_Column}
 resolved_names[1,"unique_name"]
 ```
 
-The next code gives all info from the current OpenTree synthetic tree
+The next code gives all info from the current synthetic open tree:
 ```{r}
 rotl::tol_about()
 ```
 DESCRIBE THE OUTPUT OF THE PREVIOUS CODE
 
-This gets Chiroptera OTT id:
+The previous code gave an output of the information from the Synthetic Opent Tree of Life (OTOL)
+
+This function assigns our matched name 'chiroptera' to hiroptera_ott_id and will therefore extract the ott_id we wanted for chiroptera once we run it.
 ```{r}
 chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
 chiroptera_ott_id
@@ -89,9 +94,9 @@ chiroptera_ott_id
 
 EXPLAIN HERE WHAT THE FOLLOWING SUBTREE IS
 
-And the following code will help us get a subtree:
+The following code will help us get a subtree:
 
-```{r warning=FALSE}
+```{r Obtaining_a_Subtree warning=FALSE}
 chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
 
 ape::Ntip(chiroptera_subtree)
@@ -205,6 +210,7 @@ When you run the get datelife result function it will get node ages from publish
 ```{r }
 chiroptera_dr <- datelife::get_datelife_result(chiroptera_node_subtree)
 ```
+
 The datelife result object is not a tree but a list of tables with bthe node ages for each pair od taxa from your search.
 For our 1800 species in the Chiroptera, we got the following trees with node ages:
 ```{r}
@@ -217,6 +223,7 @@ To get the actual chronograms we need to run another function:
 ```{r }
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
 ```
+
 Plotting Tree with ages
 ```{r }
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
