@@ -159,15 +159,17 @@ c(chiroptera_families$Chiroptera$ott_id)
 # and plot the induced subtree
 ```
 
-Task 2: Get an even smaller bat tree with 5 taxa that you like:
+To get an even smaller bat tree with 5 taxa that you like:
 First get the scientific names of families, genera or species of bats.
 Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
+
+here i chose: "Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae",and "Furipteridae."
 
 ```{r Assigning_to_my_ott_ids}
 my_ott_ids <- rotl::tnrs_match_names(c("Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae"))
 ```
 
-You will need to extract the ott ids only, because now you have the whole table
+We will need to extract the ott ids only, because now we have the whole table.
 ```{r Displaying_Ott_ids}
 my_ott_ids
 ```
@@ -175,11 +177,11 @@ my_ott_ids
 ```{r Assigning_my_tree}
 my_tree <- rotl::tol_induced_subtree(my_ott_ids$ott_id)
 ```
-
+This code chunk provides us with the info of our tree.
 ```{r Info_on_My_Tree}
 my_tree
 ```
-
+To plot the above tree, the ape functiopn "plot.phylo" is used. 
 ```{r Plotting_my_tree}
 ape::plot.phylo(my_tree, cex = 1)
 ```
@@ -187,16 +189,12 @@ ape::plot.phylo(my_tree, cex = 1)
 GET THE NODE AGES FOR YOUR 5 TAXA TREE:
 GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.
 
-datelife::get_datelife_result
-
-datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
-
-datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+```{r}
+datelife::get_datelife_result 
+```
 
 ```{r}
-datelife::get_datelife_result
-
-datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
+datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")  (For Luna: What can i place as my datelife result object?)
 
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
