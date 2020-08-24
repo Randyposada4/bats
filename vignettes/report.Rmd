@@ -40,6 +40,12 @@ knitr::include_graphics("../images/Batphoto1.jpg")
 
 ***
 
+**TASK 1: Add an intro to the Open Tree of Life.**
+**TASK 2: How do we use tools from the Open Tree of Life with R? Talk about the rotl package.**
+
+**TASK 3: What does the tnrs_match_names function does?.**
+
+
 ```{r get_names}
 
 my_taxa <- c("chiroptera")
@@ -89,9 +95,8 @@ chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
 chiroptera_ott_id
 ```
 
-EXPLAIN HERE WHAT THE FOLLOWING SUBTREE IS
-
 The following code will help us get a subtree:
+**TASK 4: A subtree of what?.**
 
 ```{r Obtaining_a_Subtree, warning=FALSE}
 chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
@@ -100,27 +105,32 @@ ape::Ntip(chiroptera_subtree)
 
 ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan")
 # or just plot(my_tree, cex = 0.1)
-# because it ha sno branch lengths, it does not plot pretty. We have to get branch lengths for it.
+# because it has no branch lengths, it does not plot pretty. We have to get branch lengths for it.
 # One way way to do this is to use datelife::datelife_search()
 # Another way to do it is to make up teh branch lengths with ape::compute.brlen()
 ```
 
 This will tell you if the taxon is monophyletic:
 
-It is relevant that our taxon is monophyletic since nonmonophyletic taxon contain 'invalid' or 'broken' data. When the taxon is 'broken', its ott_id is not assidigned to a node in the synthetic tree.
+It is relevant that our taxon is monophyletic since nonmonophyletic taxa contain
+'invalid' or 'broken' data. When the taxon is 'broken', its ott_id is not assidigned
+to a node in the synthetic tree.
+
 ```{r}
 rotl::is_in_tree(chiroptera_ott_id)
 ```
 The above code confirmed that indeed our taxon is monophyletic by giving the output 'TRUE'
 
-WHY DO WE NEED THE NODE OF THE TAXON  #ask luna if okay
+<!--!TASK: WHY DO WE NEED THE NODE OF THE TAXON?  #ask luna if okay Yes! it is a good answer :)-->
+
 OTT ids and node ids allow us to interact with the synthetic OTOL.
+
 ```{r Getting_Node_info}
 chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
 ```
 
-First task: Get and plot a tree of chiroptera families:
+We can use another R package --`datelife`, to get and plot a tree of chiroptera families:
 ```{r Assigning_Chiroptera_Families}
 chiroptera_families <- datelife::get_ott_children(ott_ids = chiroptera_ott_id, ott_rank = "family")
 ls(chiroptera_families)
@@ -163,7 +173,7 @@ To get an even smaller bat tree with 5 taxa that you like:
 First get the scientific names of families, genera or species of bats.
 Then run my_ott_ids <- rotl::tnrs_match_names to get the OTT ids
 
-here i chose: "Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae",and "Furipteridae."
+here I chose: "Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae",and "Furipteridae."
 
 ```{r Assigning_to_my_ott_ids}
 my_ott_ids <- rotl::tnrs_match_names(c("Megadermatidae","Mormoopidae","Vespertilionidae","Mystacinidae","Furipteridae"))
@@ -181,7 +191,7 @@ This code chunk provides us with the info of our tree.
 ```{r Info_on_My_Tree}
 my_tree
 ```
-To plot the above tree, the ape functiopn "plot.phylo" is used. 
+To plot the above tree, the ape functiopn "plot.phylo" is used.
 ```{r Plotting_my_tree}
 ape::plot.phylo(my_tree, cex = 1)
 ```
@@ -189,14 +199,22 @@ ape::plot.phylo(my_tree, cex = 1)
 GET THE NODE AGES FOR YOUR 5 TAXA TREE:
 GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.
 
+**TASK 5: Describe how do you get help to use a function in R?**
+
+**TASK 6: Run the datelife::get_datelife_result function for the Chiroptera families.**
+
+
+
 ```{r}
-datelife::get_datelife_result 
+# YOUR_DATELIFE_RESULT_OBJECT <- datelife::get_datelife_result
 ```
 
-```{r}
-datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")  (For Luna: What can i place as my datelife result object?)
+**TASK 7: Take the output from datelife::get_datelife_result and run the following code chunk.**
 
-datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+```{r}
+ # chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")  (For Luna: What can i place as my datelife result object?)
+
+# datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
 
 ***
@@ -231,7 +249,7 @@ save(chiroptera_phylo_all, file="data/chiroptera_phylo_all.RData")
 Now, we have to load it into the R work space so it is available for the next part
 
 ```{r loading_phylo_all}
-load("data/chiroptera_phylo_all.RData")
+load("../data/chiroptera_phylo_all.RData")
 ```
 
 
@@ -241,7 +259,7 @@ datelife::plot_phylo_all(trees = chiroptera_phylo_all, write="pdf")
 ```
 However, they are quite large, so we will not show them here for now.
 
-Summarizing node ages
+Summarizing node ages is slow so we will save the output of `datelife::summarize_datelife_result` in the data folder.
 ```{r Node_age_Summary}
 chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
@@ -259,6 +277,9 @@ graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo
 ```
 
 # running python
+
+** The [Physcraper](https://physcraper.readthedocs.io/en/latest/) software allow to update a published phylogeny with new DNA sequences from [GenBank.](https://www.ncbi.nlm.nih.gov/genbank/) 
+This can be your task for the fall if you are interested.**
 
 
 # Reproducibility
