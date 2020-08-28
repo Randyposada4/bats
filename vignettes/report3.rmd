@@ -1,17 +1,17 @@
 ---
-title: " Summer Research Project: Bats "
+  title: " Summer Research Project: Bats "
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{report}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+%\VignetteEngine{knitr::rmarkdown}
+%\VignetteEncoding{UTF-8}
 highlight: Tango
 theme: Sandstone
 ---
 
-***
-#### *By Randy Posada*
-```{r setup, include = FALSE}
+  ***
+  #### *By Randy Posada*
+  ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -32,19 +32,22 @@ knitr::include_graphics("../images/Batphoto1.jpg")
 
 # **My Report**
 
-## *Overview*
+## *Research Overview*
 
-  In this report I use the Open Tree of Life alongside Physcraper to create and access an updated phylogentic tree of all bats.
+  In this report I use the Open Tree of Life alongside Physcraper to create and access an updated phylogentic tree of all bats and delve into the multifunctionalities of Rstudio using the 'rotl' package to interact with The open tree of life services and the Open Tree Taxonomy.
 
   There are over 1000 different species of bats. These extraordinary flying mammals use their hands to fly; granted their order name *chiroptera*, which translates in Greek to 'Hand Wings'. Each of their fingers are connected to one another through a thin layer of skin which allows these nocturnal mammals to take off into flight. Chiroptera are the only mammals with the capability of continued flight.
 
+  # *The Open Tree Of Life*
+
+  The [Open Tree of Life](https://tree.opentreeoflife.org/opentree/argus/opentree12.3@ott93302) constructs an informative,comprehensive, and digitally-available dynamic tree of all life by synthesizing published phylogentic trees with taxonomic data to create a an comprehensive tree of all life. We can search the Open Tree Taxonomy for specific names or Ids. To observe and interact with the synthetic tree we can use [One Zoom](http://www.onezoom.org/life.html/@biota=93302?img=best_any&anim=flight#x323,y550,w0.5855).To specifically view Chiroptera in the tree, you can use the following link [One Zoom - Chiroptera](http://www.onezoom.org/life.html/@CHIROPTERA=574724?img=best_any&anim=flight#x612,y581,w0.7364). The Open tree of Life aims at assembling a comprehensice phlogenetic tree for all named species
+  We can use tools from the Open Tree of Life alongside RStudio to extract, construct, and update phylogenetic Trees. The Open Tree Taxonomy (*OTT*) synthesizs taxonomic information and assigns taxons with a unique identifier known as an *OTT Id*. To be able to use OTT Ids and interact with the open tree of life services we will need to install and use the [rotl](https://cran.r-project.org/web/packages/rotl/rotl.pdf) package. This package interface will allow the extraction of phylogenetic trees, information about the studies to build the synthetic tree, and ott ids using RStudio
+
 ***
 
-**TASK 1: Add an intro to the Open Tree of Life.**
-**TASK 2: How do we use tools from the Open Tree of Life with R? Talk about the rotl package.**
+# *R Studio Code*
 
-**TASK 3: What does the tnrs_match_names function does?.**
-
+  To get the OTT ids for a set of taxa we use the 'rotl' package. Any function from rotl that start with 'trns_' interacts with the OTT. The function `tnrs_match_names` used below allows us to deal with synonyms and misspellings and allows the linkage of scientific names to a corresponding unique OTT id. We then assign our taxon name to `resolved_names` object.
 
 ```{r get_names}
 
@@ -82,7 +85,7 @@ This is part of the previous chunk.
 resolved_names[1,"unique_name"]
 ```
 
-The next code gives all info from the current synthetic Open Tree:
+The next code gives all information from the current synthetic Open Tree:
 ```{r Obtaining_Info_From_The_OTOL}
 rotl::tol_about()
 ```
@@ -95,8 +98,7 @@ chiroptera_ott_id <- rotl::tnrs_match_names("Chiroptera")$ott_id
 chiroptera_ott_id
 ```
 
-The following code will help us get a subtree:
-**TASK 4: A subtree of what?.**
+The following code will help us get the Chiroptera subtree from the synthetic tree:
 
 ```{r Obtaining_a_Subtree, warning=FALSE}
 chiroptera_subtree <- rotl::tol_subtree(ott_id = chiroptera_ott_id)
@@ -112,8 +114,8 @@ ape::plot.phylo(chiroptera_subtree, cex = 0.1, type = "fan")
 
 This will tell you if the taxon is monophyletic:
 
-It is relevant that our taxon is monophyletic since nonmonophyletic taxa contain
-'invalid' or 'broken' data. When the taxon is 'broken', its ott_id is not assidigned
+It is relevant to note that our taxon is monophyletic since nonmonophyletic taxa contain
+'invalid' or 'broken' data. When the taxon is 'broken', its ott_id is not assigned
 to a node in the synthetic tree.
 
 ```{r}
@@ -163,7 +165,7 @@ chiroptera_families$Chiroptera$ott_id
 ```{r }
 c(chiroptera_families$Chiroptera$ott_id)
 ```
-```{r, include= FALSE}
+```{r, inculde= FALSE}
 # my_tree <- rotl::tol_induced_subtree(ott_ids = my_ott_ids)
 
 # and plot the induced subtree
@@ -196,8 +198,8 @@ To plot the above tree, the ape functiopn "plot.phylo" is used.
 ape::plot.phylo(my_tree, cex = 1)
 ```
 
-<!--Extra: GET THE NODE AGES FOR YOUR 5 TAXA TREE:
-GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.-->
+GET THE NODE AGES FOR YOUR 5 TAXA TREE:
+GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.
 
 **TASK 5: Describe how do you get help to use a function in R?**
 
@@ -223,6 +225,7 @@ GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.-->
 chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "name")
 head(chiroptera_node_subtree$tip.label)
 ```
+
 *Datelife Functions*
 
 When you run the get datelife result function it will give node ages from published trees that contain at least two taxa from your search:
@@ -254,14 +257,14 @@ load("../data/chiroptera_phylo_all.RData")
 
 
 The following function will allow us to plot the Tree with the ages.
-```{r Tree_With_Ages, eval = FALSE}
+```{r Tree_With_Ages}
 datelife::plot_phylo_all(trees = chiroptera_phylo_all, write="pdf")
 ```
 However, they are quite large, so we will not show them here for now.
 
 Summarizing node ages is slow so we will save the output of `datelife::summarize_datelife_result` in the data folder.
 This function summarizes the node information from all the chronograms in chiroptera_phylo_all.
-```{r Node_age_Summary, eval = FALSE}
+```{r Node_age_Summary}
 chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
 chiroptera_phylo_median
@@ -269,7 +272,7 @@ chiroptera_phylo_median
 
 To plot the chronogram,
 Plotting Chronogram
-```{r Plotting_Chronogram, eval = FALSE}
+```{r Plotting_Chronogram }
 ape::plot.phylo(chiroptera_phylo_median, cex = 1.2)
 # Add the time axis:
 ape::axisPhylo()
@@ -279,7 +282,8 @@ graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo
 
 # running python
 
-** The [Physcraper](https://physcraper.readthedocs.io/en/latest/) software allow to update a published phylogeny with new DNA sequences from [GenBank.](https://www.ncbi.nlm.nih.gov/genbank/)
+** The [Physcraper](https://physcraper.readthedocs.io/en/latest/) software allows to update a published phylogeny with new DNA sequences from [GenBank.](https://www.ncbi.nlm.nih.gov/genbank/)
+
 This can be your task for the fall if you are interested.**
 
 
@@ -287,7 +291,7 @@ This can be your task for the fall if you are interested.**
 
 Do you want to reproduce this report yourself?
 
-The following piece of code will render this report as pdf:
+The following piece of code will render this report as a pdf:
 
 ```{r include=FALSE, eval=FALSE}
 rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
