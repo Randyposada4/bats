@@ -208,15 +208,29 @@ GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.
 
 
 ```{r}
-# YOUR_DATELIFE_RESULT_OBJECT <- datelife::get_datelife_result
+YOUR_DATELIFE_RESULT_OBJECT <- datelife::get_datelife_result()
 ```
 
 **TASK 7: Take the output from datelife::get_datelife_result and run the following code chunk.**
 
 ```{r}
- # chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")  (For Luna: What can i place as my datelife result object?)
+chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
+```
 
-# datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+`Plot Phylo` plots the output of summarize datelife reslts.The output is all the chronogram that have at least two of the taxa that are given as input to get datelife result.
+```{r}
+datelife::plot_phylo_all(trees = chiroptera_phylo_all)
+```
+In order to for the function `plot_phylo_all` the package `phyloch` needs to be installed.
+
+To install `phyloch` we will use the package `devtools`.
+```{r}
+install.packages("devtools")
+```
+
+Then we can install `phyloch` from Github.
+```{r}
+devtools::install_github("fmichonneau/phyloch")
 ```
 
 ***
