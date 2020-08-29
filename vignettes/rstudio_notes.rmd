@@ -41,4 +41,14 @@ my_packages
 ```{r}
 library(Rtools)
 ```
+To install `phyloch` we will use the package `devtools`.
+```{r}
+install.packages("devtools")
+```
 
+Then we can install `phyloch` from Github.
+```{r eval= FALSE}
+devtools::install_github("fmichonneau/phyloch")
+#ERROR: lazy loading failed for package 'phyloch'
+#* removing 'C:/Users/randy/OneDrive/Documents/R/win-library/4.0/phyloch'
+```

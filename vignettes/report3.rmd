@@ -222,20 +222,12 @@ chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
 In order to for the function `plot_phylo_all` the package `phyloch` needs to be installed.
+the `strat2012` object is used to plot the X-axis of the chronogram plot.
 
-To install `phyloch` we will use the package `devtools`.
-```{r}
-install.packages("devtools")
-```
 
-Then we can install `phyloch` from Github.
-```{r eval= FALSE}
-devtools::install_github("fmichonneau/phyloch")
-#ERROR: lazy loading failed for package 'phyloch'
-#* removing 'C:/Users/randy/OneDrive/Documents/R/win-library/4.0/phyloch'
-```
 
 ```{r}
+library(datelife)
 data(strata2012)
 ```
 
