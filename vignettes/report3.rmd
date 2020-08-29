@@ -1,17 +1,21 @@
 ---
-  title: " Summer Research Project: Bats "
+title: "Summer Research Project: Bats "
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{report}
-%\VignetteEngine{knitr::rmarkdown}
-%\VignetteEncoding{UTF-8}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 highlight: Tango
 theme: Sandstone
 ---
 
-  ***
-  #### *By Randy Posada*
-  ```{r setup, include = FALSE}
+***
+#### *Randy Posada*, Luna L. Sanchez-Reyes, Emily Jane McTavish
+#### McTavish Lab
+
+#### UC Merced
+
+```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
@@ -274,7 +278,7 @@ However, they are quite large, so we will not show them here for now.
 
 Summarizing node ages is slow so we will save the output of `datelife::summarize_datelife_result` in the data folder.
 This function summarizes the node information from all the chronograms in chiroptera_phylo_all.
-```{r Node_age_Summary}
+```{r Node_age_Summary, eval=FALSE}
 chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
 chiroptera_phylo_median
@@ -282,7 +286,7 @@ chiroptera_phylo_median
 
 To plot the chronogram,
 Plotting Chronogram
-```{r Plotting_Chronogram }
+```{r Plotting_Chronogram, eval=FALSE }
 ape::plot.phylo(chiroptera_phylo_median, cex = 1.2)
 # Add the time axis:
 ape::axisPhylo()

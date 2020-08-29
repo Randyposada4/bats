@@ -1,5 +1,5 @@
 ---
-title: "rstudio_notes.rmd"
+title: "My summer R coding notes"
 author: "rp"
 date: "8/29/2020"
 output: html_document
@@ -9,27 +9,6 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
-
-
 The following function displays packages that are loaded in the R environment.
 ```{r}
 my_packages <- library()$results[,1]
@@ -38,9 +17,8 @@ head(my_packages, 10)
 ```{r}
 my_packages
 ```
-```{r}
-library(Rtools)
-```
+
+
 To install `phyloch` we will use the package `devtools`.
 ```{r}
 install.packages("devtools")
@@ -52,3 +30,25 @@ devtools::install_github("fmichonneau/phyloch")
 #ERROR: lazy loading failed for package 'phyloch'
 #* removing 'C:/Users/randy/OneDrive/Documents/R/win-library/4.0/phyloch'
 ```
+
+## Build my R package into a website
+
+We will use the `pkgdown` package for this
+
+Instructions from  https://pkgdown.r-lib.org/
+
+Get started with usethis:
+
+```{r eval=FALSE}
+# Run once to configure your package to use pkgdown
+usethis::use_pkgdown()
+```
+
+Use pkgdown to update your website:
+
+```{r eval=FALSE}
+
+# Run to build the website
+pkgdown::build_site()
+```
+
