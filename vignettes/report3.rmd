@@ -229,9 +229,16 @@ install.packages("devtools")
 ```
 
 Then we can install `phyloch` from Github.
-```{r}
+```{r eval= FALSE}
 devtools::install_github("fmichonneau/phyloch")
+#ERROR: lazy loading failed for package 'phyloch'
+#* removing 'C:/Users/randy/OneDrive/Documents/R/win-library/4.0/phyloch'
 ```
+
+```{r}
+data(strata2012)
+```
+
 
 ***
 
@@ -294,7 +301,7 @@ ape::axisPhylo()
 graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo",envir = .PlotPhyloEnv)$xx) * 0.5)
 ```
 
-# running python
+# Running python
 
 ** The [Physcraper](https://physcraper.readthedocs.io/en/latest/) software allows to update a published phylogeny with new DNA sequences from [GenBank.](https://www.ncbi.nlm.nih.gov/genbank/)
 
