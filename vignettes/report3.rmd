@@ -217,27 +217,25 @@ YOUR_DATELIFE_RESULT_OBJECT <- datelife::get_datelife_result()
 chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
 ```
 
-`Plot Phylo` plots the output of summarize datelife reslts.The output is all the chronogram that have at least two of the taxa that are given as input to get datelife result.
+`Plot Phylo` plots the output of summarize datelife reslts.The output is all the chronograms that have at least two of the taxa that are given as input to get datelife result.
 ```{r}
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
-In order to for the function `plot_phylo_all` the package `phyloch` needs to be installed.
+
 the `strat2012` object is used to plot the X-axis of the chronogram plot.
-
-
-
-```{r}
+```{r }
 library(datelife)
 data(strata2012)
 ```
 
-
 ***
 
+Getting a full Chiroptera Tree from the Open Tree of Life.
 ```{r}
 chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "name")
 head(chiroptera_node_subtree$tip.label)
 ```
+
 
 *Datelife Functions*
 
@@ -267,7 +265,6 @@ Now, we have to load it into the R work space so it is available for the next pa
 ```{r loading_phylo_all}
 load("../data/chiroptera_phylo_all.RData")
 ```
-
 
 The following function will allow us to plot the Tree with the ages.
 ```{r Tree_With_Ages}
@@ -312,3 +309,6 @@ rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
 
 # Attributions
 [bat image](https://unsplash.com/photos/hNz4Qh9ECCc)
+
+add link to OTL
+and references
