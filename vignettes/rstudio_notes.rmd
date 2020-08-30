@@ -6,15 +6,34 @@ output: html_document
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = TRUE, eval = FALSE)
 ```
 
-The following function displays packages that are loaded in the R environment.
+## How to make a new vignette
+
+Get started with the package `usethis` and the function `use_vignette`:
+
+```{r }
+library(usethis)
+usethis::use_vignette("report")
+```
+
+To render the vignette to pdf, you'll need  `rmarkdown` and run from R:
+
 ```{r}
+# install the package first if necessary
+# install.packages("rmarkdown")
+rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
+```
+
+##
+The following function displays packages that are loaded in the R environment.
+
+```{r, eval = TRUE}
 my_packages <- library()$results[,1]
 head(my_packages, 10)
 ```
-```{r}
+```{r, eval = TRUE}
 my_packages
 ```
 
@@ -25,7 +44,7 @@ install.packages("devtools")
 ```
 
 Then we can install `phyloch` from Github.
-```{r eval= FALSE}
+```{r}
 devtools::install_github("fmichonneau/phyloch")
 #ERROR: lazy loading failed for package 'phyloch'
 #* removing 'C:/Users/randy/OneDrive/Documents/R/win-library/4.0/phyloch'
@@ -33,22 +52,23 @@ devtools::install_github("fmichonneau/phyloch")
 
 ## Build my R package into a website
 
-We will use the `pkgdown` package for this
+We will use an R package called `pkgdown` for this.
 
-Instructions from  https://pkgdown.r-lib.org/
+We took the following instructions from  https://pkgdown.r-lib.org/:
 
-Get started with usethis:
+Get started with `use_pkgdown`. Run it once to configure your package to use `pkgdown`
 
-```{r eval=FALSE}
-# Run once to configure your package to use pkgdown
+```{r }
 usethis::use_pkgdown()
 ```
 
-Use pkgdown to update your website:
+Use `build_site` to update your website:
 
-```{r eval=FALSE}
+```{r}
 
 # Run to build the website
 pkgdown::build_site()
 ```
 
+Now, your website will be built in the `docs` folder. Make sure that the folder is not in `.gitignore`.
+Otherwise, it will not be uplodaded to GitHub and the website will not be available publicly!
