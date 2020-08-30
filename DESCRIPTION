@@ -1,15 +1,16 @@
 Package: bats
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Reports by Randy Posada
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R: c(person("Randy", "Posada", role=c("aut", "cre"), email="rposada3@ucmerced.edu"),
+  person("Luna L.", "Sanchez-Reyes", role=c("aut")),
+Maintainer: "Randy Posada" <rposada3@ucmerced.edu>
+Description: This package started as a summer research report template.
+    Additionally, it now contains notes, tips and tricks to code in R.
+License: GPL (>=2)
 Encoding: UTF-8
 LazyData: true
-Suggests: 
+Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
