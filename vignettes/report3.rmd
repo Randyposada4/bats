@@ -43,7 +43,7 @@ knitr::include_graphics("../images/Batphoto1.jpg")
   There are over 1000 different species of bats. These extraordinary flying mammals use their hands to fly; granted their order name *chiroptera*, which translates in Greek to 'Hand Wings'. Each of their fingers are connected to one another through a thin layer of skin which allows these nocturnal mammals to take off into flight. Chiroptera are the only mammals with the capability of continued flight.
 
   The [Open Tree of Life](https://tree.opentreeoflife.org/opentree/argus/opentree12.3@ott93302) constructs an informative,comprehensive, and digitally-available dynamic tree of all life by synthesizing published phylogentic trees with taxonomic data to create a an comprehensive tree of all life. We can search the Open Tree Taxonomy for specific names or Ids. To observe and interact with the synthetic tree we can use [One Zoom](http://www.onezoom.org/life.html/@biota=93302?img=best_any&anim=flight#x323,y550,w0.5855).To specifically view Chiroptera in the tree, you can use the following link [One Zoom - Chiroptera](http://www.onezoom.org/life.html/@CHIROPTERA=574724?img=best_any&anim=flight#x612,y581,w0.7364). The Open tree of Life aims at assembling a comprehensice phlogenetic tree for all named species.
-  
+
   We can use tools from the Open Tree of Life alongside RStudio to extract, construct, and update phylogenetic Trees. The Open Tree Taxonomy (*OTT*) synthesizs taxonomic information and assigns taxons with a unique identifier known as an *OTT Id*. To be able to use OTT Ids and interact with the open tree of life services we will need to install and use the [rotl](https://cran.r-project.org/web/packages/rotl/rotl.pdf) package. This package interface will allow the extraction of phylogenetic trees, information about the studies to build the synthetic tree, and ott ids using RStudio.
 
 ***
@@ -129,15 +129,16 @@ chiroptera_node_info <- rotl::tol_node_info(chiroptera_ott_id)
 chiroptera_node_info
 ```
 
-One way to obtain branch lengths proportional to time is with the datelife package. An alternative way to get branch lengths on a tree is to arbitrarily generate them with `ape::compute.brlen()`. In the following section we will use the `datelife` package. 
+One way to obtain branch lengths proportional to time is with the datelife package. An alternative way to get branch lengths on a tree is to arbitrarily generate them with `ape::compute.brlen()`. In the following section we will use the `datelife` package.
 
 ## Example 1: Chiroptera Families
 
 First we will get all families from Chiroptera and their OTT ids.
 
-```{r Assigning_Chiroptera_Families,message=FALSE}
+```{r Assigning_Chiroptera_Families, results='hide'}
 chiroptera_families <- datelife::get_ott_children(ott_ids = chiroptera_ott_id, ott_rank = "family")
-ls(chiroptera_families)
+```
+```{r}
 chiroptera_families
 ```
 
@@ -184,10 +185,10 @@ We will need to extract the OTT ids only, because now we have the whole table.
 my_ott_ids
 ```
 
-Retrieving subtree form the Open Tree Of Life.
+Retrieving a subtree from the Open Tree Of Life, with taxon names as tip labels.
 
 ```{r Assigning_my_tree}
-my_tree <- rotl::tol_induced_subtree(my_ott_ids$ott_id)
+my_tree <- rotl::tol_induced_subtree(my_ott_ids$ott_id, label_format = "name")
 ```
 
 This code chunk provides us with the info of our tree.
@@ -204,45 +205,55 @@ ape::plot.phylo(my_tree, cex = 1)
 
 **TASK 5: Describe how do you get help to use a function in R?**
 
-**TASK 6: Run the datelife::get_datelife_result function for the Chiroptera families.**
 
-Getting the dates available for the five taxa tree.
+Getting the dates available for the five taxa tree we will use the function `datelife::get_datelife_result`, but how do we use that function. Let'sget some help with `?`
 
-```{r}
-YOUR_DATELIFE_RESULT_OBJECT <- datelife::get_datelife_result(my_tree)
+```{r eval = FALSE}
+?datelife::get_datelife_result
+```
+
+Now we can run the function with some confidence.
+```{r, results='hide'}
+YOUR_DATELIFE_RESULT_OBJECT <- datelife::get_datelife_result(input = my_tree, get_spp_from_taxon = TRUE)
 ```
 
 **TASK 7: Take the output from datelife::get_datelife_result and run the following code chunk.**
 
-```{r}
+```{r, eval = FALSE}
+chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
+```
+```{r, echo = FALSE, results='hide', message=FALSE}
 chiroptera_phylo_all <- datelife::summarize_datelife_result(YOUR_DATELIFE_RESULT_OBJECT, summary_format = "phylo_all")
 ```
 
-`Plot Phylo` plots the output of `summarize_datelife_results`.The output is all the chronograms that have at least two of the taxa that are given as input to get the datelife result.
-
 ```{r}
+names(chiroptera_phylo_all)
+```
+
+`plot_phylo_all` plots the output of `summarize_datelife_results`.The output corresponds to all the chronograms that have at least two of the taxa that are given as input to the `get_datelife_result`.
+
+```{r, results='asis', message = FALSE}
 datelife::plot_phylo_all(trees = chiroptera_phylo_all)
 ```
 
-The `strat2012` object is used to plot the X-axis of the chronogram plot.
+<!-- The `strat2012` object is used to plot the X-axis of the chronogram plot. -->
 
-```{r }
-library(datelife)
-data(strata2012)
-```
+<!-- ```{r } -->
+<!-- library(datelife) -->
+<!-- data(strata2012) -->
+<!-- ``` -->
 
-***
+## Example 3: All the Chiroptera!
 
-Getting a full Chiroptera Tree from the Open Tree of Life.
-```{r}
+Let's get a full Chiroptera subtree from the Open Tree of Life.
+
+```{r, message = FALSE, warning=FALSE}
 chiroptera_node_subtree <- rotl::tol_subtree(node_id = chiroptera_node_info$node_id, label = "name")
 head(chiroptera_node_subtree$tip.label)
 ```
 
-
-*Datelife Functions*
-
-When you run the get datelife result function it will give node ages from published trees that contain at least two taxa from your search:
+When you run the `get_datelife_result` function it will get node ages from published
+trees that contain at least two taxa in your search:
 
 ```{r Assigning_chiroptera_dr}
 chiroptera_dr <- datelife::get_datelife_result(chiroptera_node_subtree)
@@ -250,6 +261,7 @@ chiroptera_dr <- datelife::get_datelife_result(chiroptera_node_subtree)
 
 The datelife result object is not a tree but a list of tables with the node ages for each pair of taxa from your search.
 For our 1800 species in the Chiroptera, we got the following trees with node ages:
+
 ```{r Obtaining_Studies}
 names(chiroptera_dr)
 ```
@@ -257,7 +269,7 @@ names(chiroptera_dr)
 We have 7 studies in OpenTree with ages for the Chiroptera. The code above provided all references of the seven studies as an output.
 
 To get the actual chronograms we need to run another function:
-```{r getting_phylo_all, eval=FALSE}
+```{r getting_phylo_all, eval=FALSE, warning=FALSE, message=FALSE}
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
 # We will write this object into a file, bc it takes a long time to run
 save(chiroptera_phylo_all, file="data/chiroptera_phylo_all.RData")
@@ -270,7 +282,7 @@ load("../data/chiroptera_phylo_all.RData")
 ```
 
 The following function will allow us to plot the Tree with the ages.
-```{r Tree_With_Ages}
+```{r Tree_With_Ages, warning=FALSE, message=FALSE}
 datelife::plot_phylo_all(trees = chiroptera_phylo_all, write="pdf")
 ```
 However, they are quite large, so we will not show them here for now.
@@ -283,8 +295,8 @@ chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, s
 chiroptera_phylo_median
 ```
 
-To plot the chronogram,
-Plotting Chronogram
+To plot the chronogram we will use `ape::plot.phylo`
+
 ```{r Plotting_Chronogram, eval=FALSE }
 ape::plot.phylo(chiroptera_phylo_median, cex = 1.2)
 # Add the time axis:
@@ -293,18 +305,18 @@ ape::axisPhylo()
 graphics::mtext("Time (myrs)", side = 1, line = 2, at = max(get("last_plot.phylo",envir = .PlotPhyloEnv)$xx) * 0.5)
 ```
 
-# Running python
+## Updating a Chiroptera chronogram with Python
 
-** The [Physcraper](https://physcraper.readthedocs.io/en/latest/) software allows to update a published phylogeny with new DNA sequences from [GenBank.](https://www.ncbi.nlm.nih.gov/genbank/)
+The [Physcraper](https://physcraper.readthedocs.io/en/latest/) software allows to update a published phylogeny with new DNA sequences from [GenBank.](https://www.ncbi.nlm.nih.gov/genbank/)
 
-This can be your task for the fall if you are interested.**
+This can be your task for the fall if you are interested.
 
 
 # Reproducibility
 
 Do you want to reproduce this report yourself?
 
-The following piece of code will render this report as a pdf:
+The following piece of code will render this report as a pdf document:
 
 ```{r include=FALSE, eval=FALSE}
 rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")

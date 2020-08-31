@@ -104,21 +104,20 @@
 <h1 class="hasAnchor">
 <a href="#my-report" class="anchor"></a><strong>My Report</strong>
 </h1>
-<div id="research-overview" class="section level2">
+<div id="introduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#research-overview" class="anchor"></a><em>Research Overview</em>
+<a href="#introduction" class="anchor"></a><em>Introduction</em>
 </h2>
 <p>In this report I use the Open Tree of Life alongside Physcraper to create and access an updated phylogentic tree of all bats and delve into the multifunctionalities of Rstudio using the ‘rotl’ package to interact with The open tree of life services and the Open Tree Taxonomy.</p>
 <p>There are over 1000 different species of bats. These extraordinary flying mammals use their hands to fly; granted their order name <em>chiroptera</em>, which translates in Greek to ‘Hand Wings’. Each of their fingers are connected to one another through a thin layer of skin which allows these nocturnal mammals to take off into flight. Chiroptera are the only mammals with the capability of continued flight.</p>
-<p># <em>The Open Tree Of Life</em></p>
-<p>The <a href="https://tree.opentreeoflife.org/opentree/argus/opentree12.3@ott93302">Open Tree of Life</a> constructs an informative,comprehensive, and digitally-available dynamic tree of all life by synthesizing published phylogentic trees with taxonomic data to create a an comprehensive tree of all life. We can search the Open Tree Taxonomy for specific names or Ids. To observe and interact with the synthetic tree we can use <a href="http://www.onezoom.org/life.html/@biota=93302?img=best_any&amp;anim=flight#x323,y550,w0.5855">One Zoom</a>.To specifically view Chiroptera in the tree, you can use the following link <a href="http://www.onezoom.org/life.html/@CHIROPTERA=574724?img=best_any&amp;anim=flight#x612,y581,w0.7364">One Zoom - Chiroptera</a>. The Open tree of Life aims at assembling a comprehensice phlogenetic tree for all named species We can use tools from the Open Tree of Life alongside RStudio to extract, construct, and update phylogenetic Trees. The Open Tree Taxonomy (<em>OTT</em>) synthesizs taxonomic information and assigns taxons with a unique identifier known as an <em>OTT Id</em>. To be able to use OTT Ids and interact with the open tree of life services we will need to install and use the <a href="https://cran.r-project.org/web/packages/rotl/rotl.pdf">rotl</a> package. This package interface will allow the extraction of phylogenetic trees, information about the studies to build the synthetic tree, and ott ids using RStudio</p>
+<p>The <a href="https://tree.opentreeoflife.org/opentree/argus/opentree12.3@ott93302">Open Tree of Life</a> constructs an informative,comprehensive, and digitally-available dynamic tree of all life by synthesizing published phylogentic trees with taxonomic data to create a an comprehensive tree of all life. We can search the Open Tree Taxonomy for specific names or Ids. To observe and interact with the synthetic tree we can use <a href="http://www.onezoom.org/life.html/@biota=93302?img=best_any&amp;anim=flight#x323,y550,w0.5855">One Zoom</a>.To specifically view Chiroptera in the tree, you can use the following link <a href="http://www.onezoom.org/life.html/@CHIROPTERA=574724?img=best_any&amp;anim=flight#x612,y581,w0.7364">One Zoom - Chiroptera</a>. The Open tree of Life aims at assembling a comprehensice phlogenetic tree for all named species.</p>
+<p>We can use tools from the Open Tree of Life alongside RStudio to extract, construct, and update phylogenetic Trees. The Open Tree Taxonomy (<em>OTT</em>) synthesizs taxonomic information and assigns taxons with a unique identifier known as an <em>OTT Id</em>. To be able to use OTT Ids and interact with the open tree of life services we will need to install and use the <a href="https://cran.r-project.org/web/packages/rotl/rotl.pdf">rotl</a> package. This package interface will allow the extraction of phylogenetic trees, information about the studies to build the synthetic tree, and ott ids using RStudio.</p>
 <hr>
 </div>
-</div>
-<div id="r-studio-code" class="section level1">
-<h1 class="hasAnchor">
-<a href="#r-studio-code" class="anchor"></a><em>R Studio Code</em>
-</h1>
+<div id="interacting-with-the-open-tree-of-life" class="section level2">
+<h2 class="hasAnchor">
+<a href="#interacting-with-the-open-tree-of-life" class="anchor"></a><em>Interacting With The Open Tree Of Life</em>
+</h2>
 <p>To get the OTT ids for a set of taxa we use the ‘rotl’ package. Any function from rotl that start with ‘trns_’ interacts with the OTT. The function <code>tnrs_match_names</code> used below allows us to deal with synonyms and misspellings and allows the linkage of scientific names to a corresponding unique OTT id. We then assign our taxon name to <code>resolved_names</code> object.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"></a>
 <a class="sourceLine" id="cb1-2" data-line-number="2">my_taxa &lt;-<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"chiroptera"</span>)</a>
@@ -129,17 +128,16 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7"><span class="co">#&gt; 1    chiroptera  Chiroptera             FALSE 574724      FALSE      </span></a>
 <a class="sourceLine" id="cb1-8" data-line-number="8"><span class="co">#&gt;   number_matches</span></a>
 <a class="sourceLine" id="cb1-9" data-line-number="9"><span class="co">#&gt; 1              1</span></a></code></pre></div>
-<p>It is useful to know the class of an object since it makes manipulating objects much easier with different functions.When we create a class we create a data structure that will house all the objects that belong to a specific class. THis is done for ease of access, organization, and clarity.</p>
+<p>It is useful to know the class of an object since it makes manipulating objects much easier with different functions.When we create a class we create a data structure that will house all the objects that belong to a specific class. This is done for ease of access, organization, and clarity.</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/class.html">class</a></span>(resolved_names)</a>
 <a class="sourceLine" id="cb2-2" data-line-number="2"><span class="co">#&gt; [1] "match_names" "data.frame"</span></a></code></pre></div>
-<p>The class of the resolved_names object allows us to view the search string name, the unique name ,and the ott_id in respect to the open tree of life. The class of the resolved_names object which includes ‘trns_match_names’, allows us to view two outputs : “match_names” and “data_frame”</p>
-<p>In the following chunk, We can subset to obtain certain columns and and if needed, manipulate the formula to extract a specific component from the row. Since there is no function that allows us to extract the values from a row of math_names, we need to use resolved names and indexing. Subsetting ultimately allows us to get values from all columns of one row.</p>
+<p>The class of the <code>resolved_names</code> object allows us to view the search string name, the unique name ,and the ott_id in respect to the open tree of life. The class of the resolved_names object which includes <code>trns_match_names</code>, allows us to view two outputs : “match_names” and “data_frame”.</p>
+<p>In the following chunk, we subset the object to obtain certain columns and if needed, manipulate the formula to extract a specific component from the row. Since there is no function that allows us to extract the values from a row of match_names, we need to use <code>resolved_names</code> and indexing. Subsetting ultimately allows us to get values from all columns of one row.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">resolved_names[<span class="dv">1</span>,]</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"><span class="co">#&gt;   search_string unique_name approximate_match ott_id is_synonym flags</span></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"><span class="co">#&gt; 1    chiroptera  Chiroptera             FALSE 574724      FALSE      </span></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4"><span class="co">#&gt;   number_matches</span></a>
 <a class="sourceLine" id="cb3-5" data-line-number="5"><span class="co">#&gt; 1              1</span></a></code></pre></div>
-<p>This is part of the previous chunk.</p>
 <p>Our goal is to obtain the ott_id for bats (Chiroptera). In order to extract the information we need to subset using the column name ‘unique_name’ in the second part of the formula ‘resolved_names’. This way, we can extract one specific value ( ) from the column we want using the column name.</p>
 <p>An OTT id is a unique numerical identifier assigned to a taxon in the Open Tree Taxonomy. Every taxon has a specific OTT id. These OTT ids allow us to interact with the Open Tree of Life.</p>
 <p>If we want to obtain the unique name of the taxon used in the synthetic open tree of life, we can use the following function. This function takes into account our previous output of data and extract a specific value.</p>
@@ -160,7 +158,7 @@
 <a class="sourceLine" id="cb5-12" data-line-number="12"><span class="co">#&gt; Root taxon: cellular organisms</span></a>
 <a class="sourceLine" id="cb5-13" data-line-number="13"><span class="co">#&gt; Root ott_id: 93302</span></a>
 <a class="sourceLine" id="cb5-14" data-line-number="14"><span class="co">#&gt; Root node_id: ott93302</span></a></code></pre></div>
-<p>The previous code gave an output of the information from the Synthetic Opent Tree of Life (OTOL) using the package ‘rotl’</p>
+<p>The previous code gave an output of the information from the Synthetic Open Tree Of Life (OTOL) using the package <code>rotl</code>.</p>
 <p>This function assigns our matched name ‘chiroptera’ to “Chiroptera_ott_id” and will therefore extract the ott_id we wanted for chiroptera once we run it.</p>
 <div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1">chiroptera_ott_id &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tnrs_match_names.html">tnrs_match_names</a></span>(<span class="st">"Chiroptera"</span>)<span class="op">$</span>ott_id</a>
 <a class="sourceLine" id="cb6-2" data-line-number="2">chiroptera_ott_id</a>
@@ -174,15 +172,11 @@
 <a class="sourceLine" id="cb7-6" data-line-number="6">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(chiroptera_subtree, <span class="dt">cex =</span> <span class="fl">0.1</span>, <span class="dt">type =</span> <span class="st">"fan"</span>)</a></code></pre></div>
 <p><img src="report3_files/figure-html/Obtaining_a_Subtree-1.png" width="700"></p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="co"># or just plot(my_tree, cex = 0.1)</span></a>
-<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># because it has no branch lengths, it does not plot pretty. We have to get branch lengths for it.</span></a>
-<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="co"># One way way to do this is to use datelife::datelife_search()</span></a>
-<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="co"># Another way to do it is to make up teh branch lengths with ape::compute.brlen()</span></a></code></pre></div>
-<p>This will tell you if the taxon is monophyletic:</p>
-<p>It is relevant to note that our taxon is monophyletic since nonmonophyletic taxa contain ‘invalid’ or ‘broken’ data. When the taxon is ‘broken’, its ott_id is not assigned to a node in the synthetic tree.</p>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="co"># because it has no branch lengths, it does not plot pretty. We have to get branch lengths for it.</span></a></code></pre></div>
+<p>It is relevant to note that our taxon is monophyletic since nonmonophyletic taxa contain ‘invalid’ or ‘broken’ data. When the taxon is ‘broken’, its ott_id is not assigned to a node in the synthetic tree. The following code will tell us if the taxon is monophyletic:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/is_in_tree.html">is_in_tree</a></span>(chiroptera_ott_id)</a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="co">#&gt; [1] TRUE</span></a></code></pre></div>
-<p>The above code confirmed that indeed our taxon is monophyletic by giving the output ‘TRUE’</p>
-<!--!TASK: WHY DO WE NEED THE NODE OF THE TAXON?  #ask luna if okay Yes! it is a good answer :)-->
+<p>The above code confirmed that indeed our taxon is monophyletic by giving the output ‘TRUE’.</p>
 <p>OTT ids and node ids allow us to interact with the synthetic OTOL.</p>
 <div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">chiroptera_node_info &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_node_info.html">tol_node_info</a></span>(chiroptera_ott_id)</a>
 <a class="sourceLine" id="cb10-2" data-line-number="2">chiroptera_node_info</a>
@@ -195,397 +189,179 @@
 <a class="sourceLine" id="cb10-9" data-line-number="9"><span class="co">#&gt; Name: Chiroptera</span></a>
 <a class="sourceLine" id="cb10-10" data-line-number="10"><span class="co">#&gt; Rank: order</span></a>
 <a class="sourceLine" id="cb10-11" data-line-number="11"><span class="co">#&gt; ott id: 574724</span></a></code></pre></div>
-<p>We can use another R package –<code>datelife</code>, to get and plot a tree of chiroptera families:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">chiroptera_families &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/get_ott_children.html">get_ott_children</a></span>(<span class="dt">ott_ids =</span> chiroptera_ott_id, <span class="dt">ott_rank =</span> <span class="st">"family"</span>)</a>
-<a class="sourceLine" id="cb11-2" data-line-number="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-3" data-line-number="3">  <span class="op">|</span><span class="st">                                                                            </span></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="st">  </span><span class="er">|</span><span class="st">                                                                      </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">  <span class="op">|</span><span class="st">                                                                            </span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="er">|======================================================================|</span><span class="st"> </span><span class="dv">100</span>%</a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8">  <span class="op">|</span><span class="st">                                                                            </span></a>
-<a class="sourceLine" id="cb11-9" data-line-number="9"><span class="st">  </span><span class="er">|</span><span class="st">                                                                      </span><span class="er">|</span><span class="st">   </span><span class="dv">0</span>%</a>
-<a class="sourceLine" id="cb11-10" data-line-number="10">  <span class="op">|</span><span class="st">                                                                            </span></a>
-<a class="sourceLine" id="cb11-11" data-line-number="11"><span class="st">  </span><span class="er">|===================================</span><span class="st">                                   </span><span class="er">|</span><span class="st">  </span><span class="dv">50</span>%</a>
-<a class="sourceLine" id="cb11-12" data-line-number="12">  <span class="op">|</span><span class="st">                                                                            </span></a>
-<a class="sourceLine" id="cb11-13" data-line-number="13"><span class="st">  </span><span class="er">|======================================================================|</span><span class="st"> </span><span class="dv">100</span>%</a>
-<a class="sourceLine" id="cb11-14" data-line-number="14"><span class="kw"><a href="https://rdrr.io/r/base/ls.html">ls</a></span>(chiroptera_families)</a>
-<a class="sourceLine" id="cb11-15" data-line-number="15"><span class="co">#&gt; [1] "Chiroptera"</span></a>
-<a class="sourceLine" id="cb11-16" data-line-number="16">chiroptera_families</a>
-<a class="sourceLine" id="cb11-17" data-line-number="17"><span class="co">#&gt; $Chiroptera</span></a>
-<a class="sourceLine" id="cb11-18" data-line-number="18"><span class="co">#&gt;                   ott_id   rank</span></a>
-<a class="sourceLine" id="cb11-19" data-line-number="19"><span class="co">#&gt; Pteropodidae      574742 family</span></a>
-<a class="sourceLine" id="cb11-20" data-line-number="20"><span class="co">#&gt; Myzopodidae         6788 family</span></a>
-<a class="sourceLine" id="cb11-21" data-line-number="21"><span class="co">#&gt; Molossidae        238416 family</span></a>
-<a class="sourceLine" id="cb11-22" data-line-number="22"><span class="co">#&gt; Vespertilionidae  238434 family</span></a>
-<a class="sourceLine" id="cb11-23" data-line-number="23"><span class="co">#&gt; Thyropteridae     267980 family</span></a>
-<a class="sourceLine" id="cb11-24" data-line-number="24"><span class="co">#&gt; Rhinopomatidae    267987 family</span></a>
-<a class="sourceLine" id="cb11-25" data-line-number="25"><span class="co">#&gt; Hipposideridae    316928 family</span></a>
-<a class="sourceLine" id="cb11-26" data-line-number="26"><span class="co">#&gt; Craseonycteridae   32051 family</span></a>
-<a class="sourceLine" id="cb11-27" data-line-number="27"><span class="co">#&gt; Rhinolophidae     635025 family</span></a>
-<a class="sourceLine" id="cb11-28" data-line-number="28"><span class="co">#&gt; Mystacinidae      759857 family</span></a>
-<a class="sourceLine" id="cb11-29" data-line-number="29"><span class="co">#&gt; Noctilionidae     759861 family</span></a>
-<a class="sourceLine" id="cb11-30" data-line-number="30"><span class="co">#&gt; Furipteridae     1060468 family</span></a>
-<a class="sourceLine" id="cb11-31" data-line-number="31"><span class="co">#&gt; Emballonuridae    581454 family</span></a>
-<a class="sourceLine" id="cb11-32" data-line-number="32"><span class="co">#&gt; Phyllostomidae    289151 family</span></a>
-<a class="sourceLine" id="cb11-33" data-line-number="33"><span class="co">#&gt; Nycteridae       1018272 family</span></a>
-<a class="sourceLine" id="cb11-34" data-line-number="34"><span class="co">#&gt; Natalidae        1018309 family</span></a>
-<a class="sourceLine" id="cb11-35" data-line-number="35"><span class="co">#&gt; Mormoopidae       292475 family</span></a>
-<a class="sourceLine" id="cb11-36" data-line-number="36"><span class="co">#&gt; Rhinonycteridae  5819794 family</span></a>
-<a class="sourceLine" id="cb11-37" data-line-number="37"><span class="co">#&gt; Megadermatidae    813048 family</span></a></code></pre></div>
-<p>Using Chiroptera Families to create tree</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">chiroptera_families_subtree &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_induced_subtree.html">tol_induced_subtree</a></span>(chiroptera_families<span class="op">$</span>Chiroptera<span class="op">$</span>ott_id)</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; Warning in collapse_singles(tr, show_progress): Dropping singleton nodes with</span></a>
-<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt; labels: Megachiroptera ott754606, mrcaott31957ott221782, mrcaott31957ott798260</span></a></code></pre></div>
-<p>Observing Tree Info</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">chiroptera_families_subtree</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; Phylogenetic tree with 18 tips and 17 internal nodes.</span></a>
-<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"><span class="co">#&gt; Tip labels:</span></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="co">#&gt;  Vespertilionidae_ott238434, Molossidae_ott238416, Natalidae_ott1018309, Myzopodidae_ott6788, Phyllostomidae_ott289151, Mormoopidae_ott292475, ...</span></a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="co">#&gt; Node labels:</span></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="co">#&gt;  Chiroptera ott574724, mrcaott6790ott6794, mrcaott6790ott6795, mrcaott6790ott130215, mrcaott6794ott73572, mrcaott6794ott9379, ...</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="co">#&gt; Rooted; no branch lengths.</span></a></code></pre></div>
-<p>Plotting Tree Of Chiroptera Families</p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(chiroptera_families_subtree, <span class="dt">cex =</span> <span class="fl">0.8</span>)</a></code></pre></div>
+<p>One way to obtain branch lengths proportional to time is with the datelife package. An alternative way to get branch lengths on a tree is to arbitrarily generate them with <code><a href="https://rdrr.io/pkg/ape/man/compute.brlen.html">ape::compute.brlen()</a></code>. In the following section we will use the <code>datelife</code> package.</p>
+</div>
+<div id="example-1-chiroptera-families" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-1-chiroptera-families" class="anchor"></a>Example 1: Chiroptera Families</h2>
+<p>First we will get all families from Chiroptera and their OTT ids.</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">chiroptera_families &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/get_ott_children.html">get_ott_children</a></span>(<span class="dt">ott_ids =</span> chiroptera_ott_id, <span class="dt">ott_rank =</span> <span class="st">"family"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">chiroptera_families</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2"><span class="co">#&gt; $Chiroptera</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="co">#&gt;                   ott_id   rank</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="co">#&gt; Pteropodidae      574742 family</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="co">#&gt; Myzopodidae         6788 family</span></a>
+<a class="sourceLine" id="cb12-6" data-line-number="6"><span class="co">#&gt; Molossidae        238416 family</span></a>
+<a class="sourceLine" id="cb12-7" data-line-number="7"><span class="co">#&gt; Vespertilionidae  238434 family</span></a>
+<a class="sourceLine" id="cb12-8" data-line-number="8"><span class="co">#&gt; Thyropteridae     267980 family</span></a>
+<a class="sourceLine" id="cb12-9" data-line-number="9"><span class="co">#&gt; Rhinopomatidae    267987 family</span></a>
+<a class="sourceLine" id="cb12-10" data-line-number="10"><span class="co">#&gt; Hipposideridae    316928 family</span></a>
+<a class="sourceLine" id="cb12-11" data-line-number="11"><span class="co">#&gt; Craseonycteridae   32051 family</span></a>
+<a class="sourceLine" id="cb12-12" data-line-number="12"><span class="co">#&gt; Rhinolophidae     635025 family</span></a>
+<a class="sourceLine" id="cb12-13" data-line-number="13"><span class="co">#&gt; Mystacinidae      759857 family</span></a>
+<a class="sourceLine" id="cb12-14" data-line-number="14"><span class="co">#&gt; Noctilionidae     759861 family</span></a>
+<a class="sourceLine" id="cb12-15" data-line-number="15"><span class="co">#&gt; Furipteridae     1060468 family</span></a>
+<a class="sourceLine" id="cb12-16" data-line-number="16"><span class="co">#&gt; Emballonuridae    581454 family</span></a>
+<a class="sourceLine" id="cb12-17" data-line-number="17"><span class="co">#&gt; Phyllostomidae    289151 family</span></a>
+<a class="sourceLine" id="cb12-18" data-line-number="18"><span class="co">#&gt; Nycteridae       1018272 family</span></a>
+<a class="sourceLine" id="cb12-19" data-line-number="19"><span class="co">#&gt; Natalidae        1018309 family</span></a>
+<a class="sourceLine" id="cb12-20" data-line-number="20"><span class="co">#&gt; Mormoopidae       292475 family</span></a>
+<a class="sourceLine" id="cb12-21" data-line-number="21"><span class="co">#&gt; Rhinonycteridae  5819794 family</span></a>
+<a class="sourceLine" id="cb12-22" data-line-number="22"><span class="co">#&gt; Megadermatidae    813048 family</span></a></code></pre></div>
+<p>We will use Chiroptera families’ OTT ids to retrieve a tree from the Open Tree Of Life.</p>
+<p>First, we must Figure out how to extract the OTT ids as a vector.</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">chiroptera_families<span class="op">$</span>Chiroptera<span class="op">$</span>ott_id</a>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="co">#&gt;  [1]  574742    6788  238416  238434  267980  267987  316928   32051  635025</span></a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"><span class="co">#&gt; [10]  759857  759861 1060468  581454  289151 1018272 1018309  292475 5819794</span></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="co">#&gt; [19]  813048</span></a></code></pre></div>
+<p>Now we can use the OTT ids to extract a subtree from the Open Tree of Life.</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">chiroptera_families_subtree &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_induced_subtree.html">tol_induced_subtree</a></span>(chiroptera_families<span class="op">$</span>Chiroptera<span class="op">$</span>ott_id)</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2"><span class="co">#&gt; Warning in collapse_singles(tr, show_progress): Dropping singleton nodes with</span></a>
+<a class="sourceLine" id="cb14-3" data-line-number="3"><span class="co">#&gt; labels: Megachiroptera ott754606, mrcaott31957ott221782, mrcaott31957ott798260</span></a></code></pre></div>
+<p>Lets look at the structure of the Chiroptera families subtree.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">chiroptera_families_subtree</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; Phylogenetic tree with 18 tips and 17 internal nodes.</span></a>
+<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"><span class="co">#&gt; Tip labels:</span></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6"><span class="co">#&gt;  Vespertilionidae_ott238434, Molossidae_ott238416, Natalidae_ott1018309, Myzopodidae_ott6788, Phyllostomidae_ott289151, Mormoopidae_ott292475, ...</span></a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"><span class="co">#&gt; Node labels:</span></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="co">#&gt;  Chiroptera ott574724, mrcaott6790ott6794, mrcaott6790ott6795, mrcaott6790ott130215, mrcaott6794ott73572, mrcaott6794ott9379, ...</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="co">#&gt; Rooted; no branch lengths.</span></a></code></pre></div>
+<p>Plotting Tree Of Chiroptera families.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(chiroptera_families_subtree, <span class="dt">cex =</span> <span class="fl">0.8</span>)</a></code></pre></div>
 <p><img src="report3_files/figure-html/plot_subtree1-1.png" width="700"></p>
-<p>Figure out how to get the ott ids as a vector.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">chiroptera_families<span class="op">$</span>Chiroptera<span class="op">$</span>ott_id</a>
-<a class="sourceLine" id="cb15-2" data-line-number="2"><span class="co">#&gt;  [1]  574742    6788  238416  238434  267980  267987  316928   32051  635025</span></a>
-<a class="sourceLine" id="cb15-3" data-line-number="3"><span class="co">#&gt; [10]  759857  759861 1060468  581454  289151 1018272 1018309  292475 5819794</span></a>
-<a class="sourceLine" id="cb15-4" data-line-number="4"><span class="co">#&gt; [19]  813048</span></a></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(chiroptera_families<span class="op">$</span>Chiroptera<span class="op">$</span>ott_id)</a>
-<a class="sourceLine" id="cb16-2" data-line-number="2"><span class="co">#&gt;  [1]  574742    6788  238416  238434  267980  267987  316928   32051  635025</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3"><span class="co">#&gt; [10]  759857  759861 1060468  581454  289151 1018272 1018309  292475 5819794</span></a>
-<a class="sourceLine" id="cb16-4" data-line-number="4"><span class="co">#&gt; [19]  813048</span></a></code></pre></div>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="co"># my_tree &lt;- rotl::tol_induced_subtree(ott_ids = my_ott_ids)</span></a>
-<a class="sourceLine" id="cb17-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co"># and plot the induced subtree</span></a></code></pre></div>
-<p>To get an even smaller bat tree with 5 taxa that you like: First get the scientific names of families, genera or species of bats. Then run my_ott_ids &lt;- rotl::tnrs_match_names to get the OTT ids</p>
-<p>here I chose: “Megadermatidae”,“Mormoopidae”,“Vespertilionidae”,“Mystacinidae”,and “Furipteridae.”</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">my_ott_ids &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tnrs_match_names.html">tnrs_match_names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Megadermatidae"</span>,<span class="st">"Mormoopidae"</span>,<span class="st">"Vespertilionidae"</span>,<span class="st">"Mystacinidae"</span>,<span class="st">"Furipteridae"</span>))</a></code></pre></div>
-<p>We will need to extract the ott ids only, because now we have the whole table.</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">my_ott_ids</a>
-<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt;      search_string      unique_name approximate_match  ott_id is_synonym flags</span></a>
-<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; 1   megadermatidae   Megadermatidae             FALSE  813048      FALSE      </span></a>
-<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; 2      mormoopidae      Mormoopidae             FALSE  292475      FALSE      </span></a>
-<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; 3 vespertilionidae Vespertilionidae             FALSE  238434      FALSE      </span></a>
-<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt; 4     mystacinidae     Mystacinidae             FALSE  759857      FALSE      </span></a>
-<a class="sourceLine" id="cb19-7" data-line-number="7"><span class="co">#&gt; 5     furipteridae     Furipteridae             FALSE 1060468      FALSE      </span></a>
-<a class="sourceLine" id="cb19-8" data-line-number="8"><span class="co">#&gt;   number_matches</span></a>
-<a class="sourceLine" id="cb19-9" data-line-number="9"><span class="co">#&gt; 1              1</span></a>
-<a class="sourceLine" id="cb19-10" data-line-number="10"><span class="co">#&gt; 2              1</span></a>
-<a class="sourceLine" id="cb19-11" data-line-number="11"><span class="co">#&gt; 3              1</span></a>
-<a class="sourceLine" id="cb19-12" data-line-number="12"><span class="co">#&gt; 4              1</span></a>
-<a class="sourceLine" id="cb19-13" data-line-number="13"><span class="co">#&gt; 5              1</span></a></code></pre></div>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">my_tree &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_induced_subtree.html">tol_induced_subtree</a></span>(my_ott_ids<span class="op">$</span>ott_id)</a>
-<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; Warning in collapse_singles(tr, show_progress): Dropping singleton nodes</span></a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt; with labels: mrcaott6790ott6795, mrcaott6790ott130215, mrcaott6794ott73572,</span></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt; mrcaott6794ott9379, mrcaott9379ott167316, mrcaott263938ott604404,</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; mrcaott604404ott1060469, mrcaott10730ott31957, mrcaott31957ott79793,</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; mrcaott79793ott289141</span></a></code></pre></div>
+</div>
+<div id="example-2-five-chiroptera-taxa-that-i-like" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-2-five-chiroptera-taxa-that-i-like" class="anchor"></a>Example 2 : Five Chiroptera Taxa That I Like</h2>
+<p>To get an even smaller bat tree with 5 taxa, first get the scientific names of families, genera, or species of bat. Then run <code><a href="https://docs.ropensci.org/rotl/reference/tnrs_match_names.html">rotl::tnrs_match_names</a></code> to get the OTT ids.</p>
+<p>Here I chose the following five Taxa: “Megadermatidae”,“Mormoopidae”,“Vespertilionidae”,“Mystacinidae”,and “Furipteridae.”</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">my_ott_ids &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tnrs_match_names.html">tnrs_match_names</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Megadermatidae"</span>,<span class="st">"Mormoopidae"</span>,<span class="st">"Vespertilionidae"</span>,<span class="st">"Mystacinidae"</span>,<span class="st">"Furipteridae"</span>))</a></code></pre></div>
+<p>We will need to extract the OTT ids only, because now we have the whole table.</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">my_ott_ids</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2"><span class="co">#&gt;      search_string      unique_name approximate_match  ott_id is_synonym flags</span></a>
+<a class="sourceLine" id="cb18-3" data-line-number="3"><span class="co">#&gt; 1   megadermatidae   Megadermatidae             FALSE  813048      FALSE      </span></a>
+<a class="sourceLine" id="cb18-4" data-line-number="4"><span class="co">#&gt; 2      mormoopidae      Mormoopidae             FALSE  292475      FALSE      </span></a>
+<a class="sourceLine" id="cb18-5" data-line-number="5"><span class="co">#&gt; 3 vespertilionidae Vespertilionidae             FALSE  238434      FALSE      </span></a>
+<a class="sourceLine" id="cb18-6" data-line-number="6"><span class="co">#&gt; 4     mystacinidae     Mystacinidae             FALSE  759857      FALSE      </span></a>
+<a class="sourceLine" id="cb18-7" data-line-number="7"><span class="co">#&gt; 5     furipteridae     Furipteridae             FALSE 1060468      FALSE      </span></a>
+<a class="sourceLine" id="cb18-8" data-line-number="8"><span class="co">#&gt;   number_matches</span></a>
+<a class="sourceLine" id="cb18-9" data-line-number="9"><span class="co">#&gt; 1              1</span></a>
+<a class="sourceLine" id="cb18-10" data-line-number="10"><span class="co">#&gt; 2              1</span></a>
+<a class="sourceLine" id="cb18-11" data-line-number="11"><span class="co">#&gt; 3              1</span></a>
+<a class="sourceLine" id="cb18-12" data-line-number="12"><span class="co">#&gt; 4              1</span></a>
+<a class="sourceLine" id="cb18-13" data-line-number="13"><span class="co">#&gt; 5              1</span></a></code></pre></div>
+<p>Retrieving a subtree from the Open Tree Of Life, with taxon names as tip labels.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">my_tree &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_induced_subtree.html">tol_induced_subtree</a></span>(my_ott_ids<span class="op">$</span>ott_id, <span class="dt">label_format =</span> <span class="st">"name"</span>)</a>
+<a class="sourceLine" id="cb19-2" data-line-number="2"><span class="co">#&gt; Warning in collapse_singles(tr, show_progress): Dropping singleton nodes</span></a>
+<a class="sourceLine" id="cb19-3" data-line-number="3"><span class="co">#&gt; with labels: mrcaott6790ott6795, mrcaott6790ott130215, mrcaott6794ott73572,</span></a>
+<a class="sourceLine" id="cb19-4" data-line-number="4"><span class="co">#&gt; mrcaott6794ott9379, mrcaott9379ott167316, mrcaott263938ott604404,</span></a>
+<a class="sourceLine" id="cb19-5" data-line-number="5"><span class="co">#&gt; mrcaott604404ott1060469, mrcaott10730ott31957, mrcaott31957ott79793,</span></a>
+<a class="sourceLine" id="cb19-6" data-line-number="6"><span class="co">#&gt; mrcaott79793ott289141</span></a></code></pre></div>
 <p>This code chunk provides us with the info of our tree.</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">my_tree</a>
-<a class="sourceLine" id="cb21-2" data-line-number="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb21-3" data-line-number="3"><span class="co">#&gt; Phylogenetic tree with 5 tips and 4 internal nodes.</span></a>
-<a class="sourceLine" id="cb21-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb21-5" data-line-number="5"><span class="co">#&gt; Tip labels:</span></a>
-<a class="sourceLine" id="cb21-6" data-line-number="6"><span class="co">#&gt; [1] "Vespertilionidae_ott238434" "Mormoopidae_ott292475"     </span></a>
-<a class="sourceLine" id="cb21-7" data-line-number="7"><span class="co">#&gt; [3] "Furipteridae_ott1060468"    "Mystacinidae_ott759857"    </span></a>
-<a class="sourceLine" id="cb21-8" data-line-number="8"><span class="co">#&gt; [5] "Megadermatidae_ott813048"  </span></a>
-<a class="sourceLine" id="cb21-9" data-line-number="9"><span class="co">#&gt; Node labels:</span></a>
-<a class="sourceLine" id="cb21-10" data-line-number="10"><span class="co">#&gt; [1] "Chiroptera ott574724" "mrcaott6790ott6794"   "mrcaott9379ott604409"</span></a>
-<a class="sourceLine" id="cb21-11" data-line-number="11"><span class="co">#&gt; [4] "mrcaott9379ott263938"</span></a>
-<a class="sourceLine" id="cb21-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb21-13" data-line-number="13"><span class="co">#&gt; Rooted; no branch lengths.</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1">my_tree</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-3" data-line-number="3"><span class="co">#&gt; Phylogenetic tree with 5 tips and 4 internal nodes.</span></a>
+<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-5" data-line-number="5"><span class="co">#&gt; Tip labels:</span></a>
+<a class="sourceLine" id="cb20-6" data-line-number="6"><span class="co">#&gt; [1] "Vespertilionidae" "Mormoopidae"      "Furipteridae"     "Mystacinidae"    </span></a>
+<a class="sourceLine" id="cb20-7" data-line-number="7"><span class="co">#&gt; [5] "Megadermatidae"  </span></a>
+<a class="sourceLine" id="cb20-8" data-line-number="8"><span class="co">#&gt; Node labels:</span></a>
+<a class="sourceLine" id="cb20-9" data-line-number="9"><span class="co">#&gt; [1] "Chiroptera"           "mrcaott6790ott6794"   "mrcaott9379ott604409"</span></a>
+<a class="sourceLine" id="cb20-10" data-line-number="10"><span class="co">#&gt; [4] "mrcaott9379ott263938"</span></a>
+<a class="sourceLine" id="cb20-11" data-line-number="11"><span class="co">#&gt; </span></a>
+<a class="sourceLine" id="cb20-12" data-line-number="12"><span class="co">#&gt; Rooted; no branch lengths.</span></a></code></pre></div>
 <p>To plot the above tree, the ape functiopn “plot.phylo” is used.</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(my_tree, <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" data-line-number="1">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(my_tree, <span class="dt">cex =</span> <span class="dv">1</span>)</a></code></pre></div>
 <p><img src="report3_files/figure-html/Plotting_my_tree-1.png" width="700"></p>
-<p>GET THE NODE AGES FOR YOUR 5 TAXA TREE: GET THE DATELIFE RESULT AND DATELIFE TREE FOR THIS TREE OF 5 TAXA.</p>
 <p><strong>TASK 5: Describe how do you get help to use a function in R?</strong></p>
-<p><strong>TASK 6: Run the datelife::get_datelife_result function for the Chiroptera families.</strong></p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">YOUR_DATELIFE_RESULT_OBJECT &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/get_datelife_result.html">get_datelife_result</a></span>()</a></code></pre></div>
+<p>Getting the dates available for the five taxa tree we will use the function <code><a href="https://rdrr.io/pkg/datelife/man/get_datelife_result.html">datelife::get_datelife_result</a></code>, but how do we use that function. Let’sget some help with <code>?</code></p>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1">?datelife<span class="op">::</span>get_datelife_result</a></code></pre></div>
+<p>Now we can run the function with some confidence.</p>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1">YOUR_DATELIFE_RESULT_OBJECT &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/get_datelife_result.html">get_datelife_result</a></span>(<span class="dt">input =</span> my_tree, <span class="dt">get_spp_from_taxon =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
 <p><strong>TASK 7: Take the output from datelife::get_datelife_result and run the following code chunk.</strong></p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">chiroptera_phylo_all &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">summarize_datelife_result</a></span>(YOUR_DATELIFE_RESULT_OBJECT, <span class="dt">summary_format =</span> <span class="st">"phylo_all"</span>)</a>
-<a class="sourceLine" id="cb24-2" data-line-number="2"><span class="co">#&gt; Source chronograms from:</span></a>
-<a class="sourceLine" id="cb24-3" data-line-number="3"><span class="co">#&gt; 1: Grealy, Alicia, Matthew Phillips, Gifford Miller, M. Thomas P. Gilbert, Jean-Marie Rouillard, David Lambert, Michael Bunce, James Haile. 2017. Eggshell palaeogenomics: Palaeognath evolutionary history revealed through ancient nuclear and mitochondrial DNA from Madagascan elephant bird (Aepyornis sp.) eggshell. Molecular Phylogenetics and Evolution 109: 151-163</span></a>
-<a class="sourceLine" id="cb24-4" data-line-number="4"><span class="co">#&gt; 2: Hedges, S. Blair, Julie Marin, Michael Suleski, Madeline Paymer, Sudhir Kumar. 2015. Tree of life reveals clock-like speciation and diversification. Molecular Biology and Evolution 32 (4): 835-845</span></a>
-<a class="sourceLine" id="cb24-5" data-line-number="5"><span class="co">#&gt; 3: Hedges, S. Blair, Julie Marin, Michael Suleski, Madeline Paymer, Sudhir Kumar. 2015. Tree of life reveals clock-like speciation and diversification. Molecular Biology and Evolution 32 (4): 835-845</span></a>
-<a class="sourceLine" id="cb24-6" data-line-number="6"><span class="co">#&gt; 4: Prum, Richard O., Jacob S. Berv, Alex Dornburg, Daniel J. Field, Jeffrey P. Townsend, Emily Moriarty Lemmon, Alan R. Lemmon. 2015. A comprehensive phylogeny of birds (Aves) using targeted next-generation DNA sequencing. Nature 526, (7574): 569-573</span></a>
-<a class="sourceLine" id="cb24-7" data-line-number="7"><span class="co">#&gt; 5: Prum, Richard O., Jacob S. Berv, Alex Dornburg, Daniel J. Field, Jeffrey P. Townsend, Emily Moriarty Lemmon, Alan R. Lemmon. 2015. A comprehensive phylogeny of birds (Aves) using targeted next-generation DNA sequencing. Nature 526, (7574): 569-573</span></a>
-<a class="sourceLine" id="cb24-8" data-line-number="8"><span class="co">#&gt; 6: Claramunt, Santiago, Joel Cracraft. 2015. A new time tree reveals Earth historys imprint on the evolution of modern birds. Science Advances 1 (11): e1501005-e1501005</span></a>
-<a class="sourceLine" id="cb24-9" data-line-number="9"><span class="co">#&gt; 7: Jetz, W., G. H. Thomas, J. B. Joy, K. Hartmann, A. O. Mooers. 2012. The global diversity of birds in space and time. Nature 491 (7424): 444-448</span></a>
-<a class="sourceLine" id="cb24-10" data-line-number="10"><span class="co">#&gt; 8: Jetz, W., G. H. Thomas, J. B. Joy, K. Hartmann, A. O. Mooers. 2012. The global diversity of birds in space and time. Nature 491 (7424): 444-448</span></a>
-<a class="sourceLine" id="cb24-11" data-line-number="11"><span class="co">#&gt; 9: Mitchell, K. J., B. Llamas, J. Soubrier, N. J. Rawlence, T. H. Worthy, J. Wood, M. S. Y. Lee, A. Cooper. 2014. Ancient DNA reveals elephant birds and kiwi are sister taxa and clarifies ratite bird evolution. Science 344 (6186): 898-900.</span></a>
-<a class="sourceLine" id="cb24-12" data-line-number="12"><span class="co">#&gt; Input taxa presence across source chronograms:</span></a>
-<a class="sourceLine" id="cb24-13" data-line-number="13"><span class="co">#&gt;                 taxon chronograms</span></a>
-<a class="sourceLine" id="cb24-14" data-line-number="14"><span class="co">#&gt; 1 Pterocnemia pennata         6/9</span></a>
-<a class="sourceLine" id="cb24-15" data-line-number="15"><span class="co">#&gt; 2      Rhea americana         9/9</span></a>
-<a class="sourceLine" id="cb24-16" data-line-number="16"><span class="co">#&gt; 3    Struthio camelus         9/9</span></a>
-<a class="sourceLine" id="cb24-17" data-line-number="17"><span class="co">#&gt; Input taxa completely absent from source chronograms:</span></a>
-<a class="sourceLine" id="cb24-18" data-line-number="18"><span class="co">#&gt;   taxon</span></a>
-<a class="sourceLine" id="cb24-19" data-line-number="19"><span class="co">#&gt; 1  None</span></a></code></pre></div>
-<p><code>Plot Phylo</code> plots the output of summarize datelife reslts.The output is all the chronograms that have at least two of the taxa that are given as input to get datelife result.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/plot_phylo_all.html">plot_phylo_all</a></span>(<span class="dt">trees =</span> chiroptera_phylo_all)</a>
-<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb25-9" data-line-number="9"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb25-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb25-11" data-line-number="11"><span class="co">#&gt; Stage 4: Cretaceous</span></a></code></pre></div>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-2.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-3.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-4.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-5.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-6.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-7.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-8.png" width="700"></p>
-<pre><code>#&gt; 
-#&gt; Plot unit:period
-#&gt; 
-#&gt; Stage 1: Quaternary
-#&gt; 
-#&gt; Stage 2: Neogene
-#&gt; 
-#&gt; Stage 3: Paleogene
-#&gt; 
-#&gt; Stage 4: Cretaceous</code></pre>
-<p><img src="report3_files/figure-html/unnamed-chunk-7-9.png" width="700"></p>
-<p>the <code>strat2012</code> object is used to plot the X-axis of the chronogram plot.</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(datelife)</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(strata2012)</a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="co">#&gt; Warning in data(strata2012): data set 'strata2012' not found</span></a></code></pre></div>
-<hr>
-<p>Getting a full Chiroptera Tree from the Open Tree of Life.</p>
-<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" data-line-number="1">chiroptera_node_subtree &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_subtree.html">tol_subtree</a></span>(<span class="dt">node_id =</span> chiroptera_node_info<span class="op">$</span>node_id, <span class="dt">label =</span> <span class="st">"name"</span>)</a>
-<a class="sourceLine" id="cb35-2" data-line-number="2"><span class="co">#&gt; Warning in collapse_singles(tr, show_progress): Dropping singleton nodes with</span></a>
-<a class="sourceLine" id="cb35-3" data-line-number="3"><span class="co">#&gt; labels: Murina aurata, Murina huttoni, Eudiscopus, Myotis cf. nipalensis,</span></a>
-<a class="sourceLine" id="cb35-4" data-line-number="4"><span class="co">#&gt; Myotis muricola, Myotis siligorensis, Myotis bombinus, Myotis myotis, Myotis</span></a>
-<a class="sourceLine" id="cb35-5" data-line-number="5"><span class="co">#&gt; bocagii, Myotis nesopolus, Myotis oxyotus, Myotis martiniquensis, Myotis evotis,</span></a>
-<a class="sourceLine" id="cb35-6" data-line-number="6"><span class="co">#&gt; Myotis brandtii, Submyotodon, Scotomanes, Ia, Lasionycteris, Nycticeinops,</span></a>
-<a class="sourceLine" id="cb35-7" data-line-number="7"><span class="co">#&gt; Philetor, Pipistrellus javanicus, Nyctalus leisleri, Plecotus teneriffae,</span></a>
-<a class="sourceLine" id="cb35-8" data-line-number="8"><span class="co">#&gt; Plecotus austriacus, Plecotus macrobullaris, Euderma, Idionycteris, Perimyotis,</span></a>
-<a class="sourceLine" id="cb35-9" data-line-number="9"><span class="co">#&gt; Parastrellus, Lasiurus blossevillii, Dasypterus intermedius, Aeorestes</span></a>
-<a class="sourceLine" id="cb35-10" data-line-number="10"><span class="co">#&gt; cinereus, Scotophilus viridis, Miniopterinae, Miniopterus griveaudi, Miniopterus</span></a>
-<a class="sourceLine" id="cb35-11" data-line-number="11"><span class="co">#&gt; natalensis, Niumbaha, Scotozous, Scoteanax, Pharotis, Mimetillus, Atalapha,</span></a>
-<a class="sourceLine" id="cb35-12" data-line-number="12"><span class="co">#&gt; Cynomops abrasus, Cynomops paranus, Eumops glaucinus, Eumops bonariensis,</span></a>
-<a class="sourceLine" id="cb35-13" data-line-number="13"><span class="co">#&gt; Sauromys, Molossus currentium, Tomopeas, Platymops, Natalus stramineus,</span></a>
-<a class="sourceLine" id="cb35-14" data-line-number="14"><span class="co">#&gt; Nyctiellus, Myzopodidae, Centurio senex, Sphaeronycteris, Pygoderma, Ametrida,</span></a>
-<a class="sourceLine" id="cb35-15" data-line-number="15"><span class="co">#&gt; Ariteus, Ardops, Cubanycteris, Ectophylla, Platyrrhinus helleri, Platyrrhinus</span></a>
-<a class="sourceLine" id="cb35-16" data-line-number="16"><span class="co">#&gt; lineatus, Mesophylla (genus in Opisthokonta), Sturnira lilium, Lionycteris,</span></a>
-<a class="sourceLine" id="cb35-17" data-line-number="17"><span class="co">#&gt; Platalina, Xeronycteris, Lophostoma silvicolum, Macrophyllum, Vampyrum,</span></a>
-<a class="sourceLine" id="cb35-18" data-line-number="18"><span class="co">#&gt; Chrotopterus, Brachyphyllinae, Brachyphylla nana, Lichonycteris, Musonycteris,</span></a>
-<a class="sourceLine" id="cb35-19" data-line-number="19"><span class="co">#&gt; Choeronycteris, Hylonycteris, Diaemus, Neonycteris, Scleronycteris,</span></a>
-<a class="sourceLine" id="cb35-20" data-line-number="20"><span class="co">#&gt; Dryadonycteris, Pteronotus davyi, Pteronotus personatus, Thyropteridae,</span></a>
-<a class="sourceLine" id="cb35-21" data-line-number="21"><span class="co">#&gt; Noctilionidae, Amorphochilus, Mystacinidae, Emballonura semicaudata, Cormura,</span></a>
-<a class="sourceLine" id="cb35-22" data-line-number="22"><span class="co">#&gt; Cyttarops, Mosia, Rhynchonycteris, Nycteridae, Megachiroptera, Boneia,</span></a>
-<a class="sourceLine" id="cb35-23" data-line-number="23"><span class="co">#&gt; Mirimiri, Nyctimene albiventer, Pteropus pelewensis, Pteropus admiralitatum,</span></a>
-<a class="sourceLine" id="cb35-24" data-line-number="24"><span class="co">#&gt; Pteropus rayneri, Pteropus samoensis, Pteropus anetianus, Pteropus capistratus,</span></a>
-<a class="sourceLine" id="cb35-25" data-line-number="25"><span class="co">#&gt; Pteropus dasymallus, Pteropus melanotus, Melonycteris woodfordi, Nanonycteris,</span></a>
-<a class="sourceLine" id="cb35-26" data-line-number="26"><span class="co">#&gt; Scotonycteris zenkeri, Chironax, Penthetor, Haplonycteris, Alionycteris,</span></a>
-<a class="sourceLine" id="cb35-27" data-line-number="27"><span class="co">#&gt; Latidens, Sphaerias, Aproteles, Neopteryx, Plerotes, Hipposideros pomona,</span></a>
-<a class="sourceLine" id="cb35-28" data-line-number="28"><span class="co">#&gt; Hipposideros ater, Hipposideros caffer, Hipposideros diadema, Anthops,</span></a>
-<a class="sourceLine" id="cb35-29" data-line-number="29"><span class="co">#&gt; Macronycteris, Rhinonicteris, Cloeotis, Rhinolophidae, Rhinolophinae,</span></a>
-<a class="sourceLine" id="cb35-30" data-line-number="30"><span class="co">#&gt; Rhinolophus lepidus, Rhinolophus rouxii, Rhinolophus sinicus, Rhinopomatidae,</span></a>
-<a class="sourceLine" id="cb35-31" data-line-number="31"><span class="co">#&gt; Rhinopoma hardwickii, Craseonycteridae, Craseonycteris, Macroderma (genus in</span></a>
-<a class="sourceLine" id="cb35-32" data-line-number="32"><span class="co">#&gt; Holozoa), Cardioderma, Lavia, Eudiscoderma, Archaeonycteridae, Icaronycteris,</span></a>
-<a class="sourceLine" id="cb35-33" data-line-number="33"><span class="co">#&gt; Onychonycteridae, Onychonycteris</span></a>
-<a class="sourceLine" id="cb35-34" data-line-number="34"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(chiroptera_node_subtree<span class="op">$</span>tip.label)</a>
-<a class="sourceLine" id="cb35-35" data-line-number="35"><span class="co">#&gt; [1] "Kerivoula_hardwickii"  "Kerivoula_titania"     "Kerivoula_kachinensis"</span></a>
-<a class="sourceLine" id="cb35-36" data-line-number="36"><span class="co">#&gt; [4] "Kerivoula_intermedia"  "Kerivoula_minuta"      "Kerivoula_whiteheadi"</span></a></code></pre></div>
-<p><em>Datelife Functions</em></p>
-<p>When you run the get datelife result function it will give node ages from published trees that contain at least two taxa from your search:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">chiroptera_dr &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/get_datelife_result.html">get_datelife_result</a></span>(chiroptera_node_subtree)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">chiroptera_phylo_all &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">summarize_datelife_result</a></span>(YOUR_DATELIFE_RESULT_OBJECT, <span class="dt">summary_format =</span> <span class="st">"phylo_all"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(chiroptera_phylo_all)</a>
+<a class="sourceLine" id="cb25-2" data-line-number="2"><span class="co">#&gt; [1] "Shi, Jeff J., Daniel L. Rabosky. 2015. Speciation dynamics during the global radiation of extant bats. Evolution 69 (6): 1528-1545"                                                                                                                            </span></a>
+<a class="sourceLine" id="cb25-3" data-line-number="3"><span class="co">#&gt; [2] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
+<a class="sourceLine" id="cb25-4" data-line-number="4"><span class="co">#&gt; [3] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
+<a class="sourceLine" id="cb25-5" data-line-number="5"><span class="co">#&gt; [4] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
+<a class="sourceLine" id="cb25-6" data-line-number="6"><span class="co">#&gt; [5] "Hedges, S. Blair, Julie Marin, Michael Suleski, Madeline Paymer, Sudhir Kumar. 2015. Tree of life reveals clock-like speciation and diversification. Molecular Biology and Evolution 32 (4): 835-845"                                                          </span></a>
+<a class="sourceLine" id="cb25-7" data-line-number="7"><span class="co">#&gt; [6] "Lack J.B., &amp; Van den bussche R.A. 2010. Identifying the Confounding Factors in Resolving Phylogenetic Relationships in Vespertilionidae. Journal of Mammalogy, ."                                                                                              </span></a>
+<a class="sourceLine" id="cb25-8" data-line-number="8"><span class="co">#&gt; [7] "Dumont E.R., Davalos L.M., Goldberg A., Santana S.E., Rex K., &amp; Voigt C.C. 2012. Morphological innovation, diversification and invasion of a new adaptive zone. Proceedings of the Royal Society B: Biological Sciences, 279: 1797-1805."</span></a></code></pre></div>
+<p><code>plot_phylo_all</code> plots the output of <code>summarize_datelife_results</code>.The output corresponds to all the chronograms that have at least two of the taxa that are given as input to the <code>get_datelife_result</code>.</p>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1">datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/plot_phylo_all.html">plot_phylo_all</a></span>(<span class="dt">trees =</span> chiroptera_phylo_all)</a></code></pre></div>
+<p><img src="report3_files/figure-html/unnamed-chunk-9-1.png" width="700"><img src="report3_files/figure-html/unnamed-chunk-9-2.png" width="700"><img src="report3_files/figure-html/unnamed-chunk-9-3.png" width="700"><img src="report3_files/figure-html/unnamed-chunk-9-4.png" width="700"><img src="report3_files/figure-html/unnamed-chunk-9-5.png" width="700"><img src="report3_files/figure-html/unnamed-chunk-9-6.png" width="700"><img src="report3_files/figure-html/unnamed-chunk-9-7.png" width="700"></p>
+<!-- The `strat2012` object is used to plot the X-axis of the chronogram plot. -->
+<!-- ```{r } -->
+<!-- library(datelife) -->
+<!-- data(strata2012) -->
+<!-- ``` -->
+</div>
+<div id="example-3-all-the-chiroptera" class="section level2">
+<h2 class="hasAnchor">
+<a href="#example-3-all-the-chiroptera" class="anchor"></a>Example 3: All the Chiroptera!</h2>
+<p>Let’s get a full Chiroptera subtree from the Open Tree of Life.</p>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">chiroptera_node_subtree &lt;-<span class="st"> </span>rotl<span class="op">::</span><span class="kw"><a href="https://docs.ropensci.org/rotl/reference/tol_subtree.html">tol_subtree</a></span>(<span class="dt">node_id =</span> chiroptera_node_info<span class="op">$</span>node_id, <span class="dt">label =</span> <span class="st">"name"</span>)</a>
+<a class="sourceLine" id="cb27-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(chiroptera_node_subtree<span class="op">$</span>tip.label)</a>
+<a class="sourceLine" id="cb27-3" data-line-number="3"><span class="co">#&gt; [1] "Kerivoula_hardwickii"  "Kerivoula_titania"     "Kerivoula_kachinensis"</span></a>
+<a class="sourceLine" id="cb27-4" data-line-number="4"><span class="co">#&gt; [4] "Kerivoula_intermedia"  "Kerivoula_minuta"      "Kerivoula_whiteheadi"</span></a></code></pre></div>
+<p>When you run the <code>get_datelife_result</code> function it will get node ages from published trees that contain at least two taxa in your search:</p>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">chiroptera_dr &lt;-<span class="st"> </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/get_datelife_result.html">get_datelife_result</a></span>(chiroptera_node_subtree)</a></code></pre></div>
 <p>The datelife result object is not a tree but a list of tables with the node ages for each pair of taxa from your search. For our 1800 species in the Chiroptera, we got the following trees with node ages:</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(chiroptera_dr)</a>
-<a class="sourceLine" id="cb37-2" data-line-number="2"><span class="co">#&gt; [1] "Shi, Jeff J., Daniel L. Rabosky. 2015. Speciation dynamics during the global radiation of extant bats. Evolution 69 (6): 1528-1545"                                                                                                                            </span></a>
-<a class="sourceLine" id="cb37-3" data-line-number="3"><span class="co">#&gt; [2] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
-<a class="sourceLine" id="cb37-4" data-line-number="4"><span class="co">#&gt; [3] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
-<a class="sourceLine" id="cb37-5" data-line-number="5"><span class="co">#&gt; [4] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
-<a class="sourceLine" id="cb37-6" data-line-number="6"><span class="co">#&gt; [5] "Hedges, S. Blair, Julie Marin, Michael Suleski, Madeline Paymer, Sudhir Kumar. 2015. Tree of life reveals clock-like speciation and diversification. Molecular Biology and Evolution 32 (4): 835-845"                                                          </span></a>
-<a class="sourceLine" id="cb37-7" data-line-number="7"><span class="co">#&gt; [6] "Lack J.B., &amp; Van den bussche R.A. 2010. Identifying the Confounding Factors in Resolving Phylogenetic Relationships in Vespertilionidae. Journal of Mammalogy, ."                                                                                              </span></a>
-<a class="sourceLine" id="cb37-8" data-line-number="8"><span class="co">#&gt; [7] "Dumont E.R., Davalos L.M., Goldberg A., Santana S.E., Rex K., &amp; Voigt C.C. 2012. Morphological innovation, diversification and invasion of a new adaptive zone. Proceedings of the Royal Society B: Biological Sciences, 279: 1797-1805."</span></a></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(chiroptera_dr)</a>
+<a class="sourceLine" id="cb29-2" data-line-number="2"><span class="co">#&gt; [1] "Shi, Jeff J., Daniel L. Rabosky. 2015. Speciation dynamics during the global radiation of extant bats. Evolution 69 (6): 1528-1545"                                                                                                                            </span></a>
+<a class="sourceLine" id="cb29-3" data-line-number="3"><span class="co">#&gt; [2] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
+<a class="sourceLine" id="cb29-4" data-line-number="4"><span class="co">#&gt; [3] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
+<a class="sourceLine" id="cb29-5" data-line-number="5"><span class="co">#&gt; [4] "Bininda-Emonds, Olaf R. P., Marcel Cardillo, Kate E. Jones, Ross D. E. MacPhee, Robin M. D. Beck, Richard Grenyer, Samantha A. Price, Rutger A. Vos, John L. Gittleman, Andy Purvis. 2007. The delayed rise of present-day mammals. Nature 446 (7135): 507-512"</span></a>
+<a class="sourceLine" id="cb29-6" data-line-number="6"><span class="co">#&gt; [5] "Hedges, S. Blair, Julie Marin, Michael Suleski, Madeline Paymer, Sudhir Kumar. 2015. Tree of life reveals clock-like speciation and diversification. Molecular Biology and Evolution 32 (4): 835-845"                                                          </span></a>
+<a class="sourceLine" id="cb29-7" data-line-number="7"><span class="co">#&gt; [6] "Lack J.B., &amp; Van den bussche R.A. 2010. Identifying the Confounding Factors in Resolving Phylogenetic Relationships in Vespertilionidae. Journal of Mammalogy, ."                                                                                              </span></a>
+<a class="sourceLine" id="cb29-8" data-line-number="8"><span class="co">#&gt; [7] "Dumont E.R., Davalos L.M., Goldberg A., Santana S.E., Rex K., &amp; Voigt C.C. 2012. Morphological innovation, diversification and invasion of a new adaptive zone. Proceedings of the Royal Society B: Biological Sciences, 279: 1797-1805."</span></a></code></pre></div>
 <p>We have 7 studies in OpenTree with ages for the Chiroptera. The code above provided all references of the seven studies as an output.</p>
 <p>To get the actual chronograms we need to run another function:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">chiroptera_phylo_all &lt;-<span class="st">  </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">summarize_datelife_result</a></span>(chiroptera_dr, <span class="dt">summary_format =</span> <span class="st">"phylo_all"</span>)</a>
-<a class="sourceLine" id="cb38-2" data-line-number="2"><span class="co"># We will write this object into a file, bc it takes a long time to run</span></a>
-<a class="sourceLine" id="cb38-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/save.html">save</a></span>(chiroptera_phylo_all, <span class="dt">file=</span><span class="st">"data/chiroptera_phylo_all.RData"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">chiroptera_phylo_all &lt;-<span class="st">  </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">summarize_datelife_result</a></span>(chiroptera_dr, <span class="dt">summary_format =</span> <span class="st">"phylo_all"</span>)</a>
+<a class="sourceLine" id="cb30-2" data-line-number="2"><span class="co"># We will write this object into a file, bc it takes a long time to run</span></a>
+<a class="sourceLine" id="cb30-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/base/save.html">save</a></span>(chiroptera_phylo_all, <span class="dt">file=</span><span class="st">"data/chiroptera_phylo_all.RData"</span>)</a></code></pre></div>
 <p>Now, we have to load it into the R work space so it is available for the next part</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="st">"../data/chiroptera_phylo_all.RData"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/load.html">load</a></span>(<span class="st">"../data/chiroptera_phylo_all.RData"</span>)</a></code></pre></div>
 <p>The following function will allow us to plot the Tree with the ages.</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/plot_phylo_all.html">plot_phylo_all</a></span>(<span class="dt">trees =</span> chiroptera_phylo_all, <span class="dt">write=</span><span class="st">"pdf"</span>)</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"><span class="co">#&gt; Warning in dir.create(x): '/Users/luna/pj_physcraper/bats/vignettes/phylo_all'</span></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="co">#&gt; already exists</span></a>
-<a class="sourceLine" id="cb40-4" data-line-number="4"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-5" data-line-number="5"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-6" data-line-number="6"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-7" data-line-number="7"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-8" data-line-number="8"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-9" data-line-number="9"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-10" data-line-number="10"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-11" data-line-number="11"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-12" data-line-number="12"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-13" data-line-number="13"><span class="co">#&gt; Stage 4: Cretaceous</span></a>
-<a class="sourceLine" id="cb40-14" data-line-number="14"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-15" data-line-number="15"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-16" data-line-number="16"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-17" data-line-number="17"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-18" data-line-number="18"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-19" data-line-number="19"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-20" data-line-number="20"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-21" data-line-number="21"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-22" data-line-number="22"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-23" data-line-number="23"><span class="co">#&gt; Stage 4: Cretaceous</span></a>
-<a class="sourceLine" id="cb40-24" data-line-number="24"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-25" data-line-number="25"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-26" data-line-number="26"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-27" data-line-number="27"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-28" data-line-number="28"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-29" data-line-number="29"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-30" data-line-number="30"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-31" data-line-number="31"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-32" data-line-number="32"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-33" data-line-number="33"><span class="co">#&gt; Stage 4: Cretaceous</span></a>
-<a class="sourceLine" id="cb40-34" data-line-number="34"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-35" data-line-number="35"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-36" data-line-number="36"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-37" data-line-number="37"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-38" data-line-number="38"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-39" data-line-number="39"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-40" data-line-number="40"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-41" data-line-number="41"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-42" data-line-number="42"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-43" data-line-number="43"><span class="co">#&gt; Stage 4: Cretaceous</span></a>
-<a class="sourceLine" id="cb40-44" data-line-number="44"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-45" data-line-number="45"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-46" data-line-number="46"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-47" data-line-number="47"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-48" data-line-number="48"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-49" data-line-number="49"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-50" data-line-number="50"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-51" data-line-number="51"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-52" data-line-number="52"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-53" data-line-number="53"><span class="co">#&gt; Stage 4: Cretaceous</span></a>
-<a class="sourceLine" id="cb40-54" data-line-number="54"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-55" data-line-number="55"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-56" data-line-number="56"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-57" data-line-number="57"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-58" data-line-number="58"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-59" data-line-number="59"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-60" data-line-number="60"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-61" data-line-number="61"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-62" data-line-number="62"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-63" data-line-number="63"><span class="co">#&gt; Stage 4: Cretaceous</span></a>
-<a class="sourceLine" id="cb40-64" data-line-number="64"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-65" data-line-number="65"><span class="co">#&gt; Plot unit:period</span></a>
-<a class="sourceLine" id="cb40-66" data-line-number="66"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-67" data-line-number="67"><span class="co">#&gt; Stage 1: Quaternary</span></a>
-<a class="sourceLine" id="cb40-68" data-line-number="68"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-69" data-line-number="69"><span class="co">#&gt; Stage 2: Neogene</span></a>
-<a class="sourceLine" id="cb40-70" data-line-number="70"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-71" data-line-number="71"><span class="co">#&gt; Stage 3: Paleogene</span></a>
-<a class="sourceLine" id="cb40-72" data-line-number="72"><span class="co">#&gt; </span></a>
-<a class="sourceLine" id="cb40-73" data-line-number="73"><span class="co">#&gt; Stage 4: Cretaceous</span></a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/plot_phylo_all.html">plot_phylo_all</a></span>(<span class="dt">trees =</span> chiroptera_phylo_all, <span class="dt">write=</span><span class="st">"pdf"</span>)</a></code></pre></div>
 <p>However, they are quite large, so we will not show them here for now.</p>
 <p>Summarizing node ages is slow so we will save the output of <code><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">datelife::summarize_datelife_result</a></code> in the data folder. This function summarizes the node information from all the chronograms in chiroptera_phylo_all.</p>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" data-line-number="1">chiroptera_phylo_median &lt;-<span class="st">  </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">summarize_datelife_result</a></span>(chiroptera_dr, <span class="dt">summary_format =</span> <span class="st">"phylo_median"</span>)</a>
-<a class="sourceLine" id="cb41-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb41-3" data-line-number="3">chiroptera_phylo_median</a></code></pre></div>
-<p>To plot the chronogram, Plotting Chronogram</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(chiroptera_phylo_median, <span class="dt">cex =</span> <span class="fl">1.2</span>)</a>
-<a class="sourceLine" id="cb42-2" data-line-number="2"><span class="co"># Add the time axis:</span></a>
-<a class="sourceLine" id="cb42-3" data-line-number="3">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span>()</a>
-<a class="sourceLine" id="cb42-4" data-line-number="4"><span class="co"># And a little hack to add the axis name:</span></a>
-<a class="sourceLine" id="cb42-5" data-line-number="5">graphics<span class="op">::</span><span class="kw"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span>(<span class="st">"Time (myrs)"</span>, <span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">line =</span> <span class="dv">2</span>, <span class="dt">at =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="st">"last_plot.phylo"</span>,<span class="dt">envir =</span> .PlotPhyloEnv)<span class="op">$</span>xx) <span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1">chiroptera_phylo_median &lt;-<span class="st">  </span>datelife<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/datelife/man/summarize_datelife_result.html">summarize_datelife_result</a></span>(chiroptera_dr, <span class="dt">summary_format =</span> <span class="st">"phylo_median"</span>)</a>
+<a class="sourceLine" id="cb33-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb33-3" data-line-number="3">chiroptera_phylo_median</a></code></pre></div>
+<p>To plot the chronogram we will use <code><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">ape::plot.phylo</a></code></p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/plot.phylo.html">plot.phylo</a></span>(chiroptera_phylo_median, <span class="dt">cex =</span> <span class="fl">1.2</span>)</a>
+<a class="sourceLine" id="cb34-2" data-line-number="2"><span class="co"># Add the time axis:</span></a>
+<a class="sourceLine" id="cb34-3" data-line-number="3">ape<span class="op">::</span><span class="kw"><a href="https://rdrr.io/pkg/ape/man/axisPhylo.html">axisPhylo</a></span>()</a>
+<a class="sourceLine" id="cb34-4" data-line-number="4"><span class="co"># And a little hack to add the axis name:</span></a>
+<a class="sourceLine" id="cb34-5" data-line-number="5">graphics<span class="op">::</span><span class="kw"><a href="https://rdrr.io/r/graphics/mtext.html">mtext</a></span>(<span class="st">"Time (myrs)"</span>, <span class="dt">side =</span> <span class="dv">1</span>, <span class="dt">line =</span> <span class="dv">2</span>, <span class="dt">at =</span> <span class="kw"><a href="https://rdrr.io/r/base/Extremes.html">max</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/get.html">get</a></span>(<span class="st">"last_plot.phylo"</span>,<span class="dt">envir =</span> .PlotPhyloEnv)<span class="op">$</span>xx) <span class="op">*</span><span class="st"> </span><span class="fl">0.5</span>)</a></code></pre></div>
 </div>
-<div id="running-python" class="section level1">
-<h1 class="hasAnchor">
-<a href="#running-python" class="anchor"></a>Running python</h1>
-<p>** The <a href="https://physcraper.readthedocs.io/en/latest/">Physcraper</a> software allows to update a published phylogeny with new DNA sequences from <a href="https://www.ncbi.nlm.nih.gov/genbank/">GenBank.</a></p>
-<p>This can be your task for the fall if you are interested.**</p>
+<div id="updating-a-chiroptera-chronogram-with-python" class="section level2">
+<h2 class="hasAnchor">
+<a href="#updating-a-chiroptera-chronogram-with-python" class="anchor"></a>Updating a Chiroptera chronogram with Python</h2>
+<p>The <a href="https://physcraper.readthedocs.io/en/latest/">Physcraper</a> software allows to update a published phylogeny with new DNA sequences from <a href="https://www.ncbi.nlm.nih.gov/genbank/">GenBank.</a></p>
+<p>This can be your task for the fall if you are interested.</p>
+</div>
 </div>
 <div id="reproducibility" class="section level1">
 <h1 class="hasAnchor">
 <a href="#reproducibility" class="anchor"></a>Reproducibility</h1>
 <p>Do you want to reproduce this report yourself?</p>
-<p>The following piece of code will render this report as a pdf:</p>
+<p>The following piece of code will render this report as a pdf document:</p>
 </div>
 <div id="attributions" class="section level1">
 <h1 class="hasAnchor">
@@ -603,11 +379,14 @@
       <ul class="nav nav-pills nav-stacked">
 <li>
 <a href="#my-report"><strong>My Report</strong></a><ul class="nav nav-pills nav-stacked">
-<li><a href="#research-overview"><em>Research Overview</em></a></li>
+<li><a href="#introduction"><em>Introduction</em></a></li>
+      <li><a href="#interacting-with-the-open-tree-of-life"><em>Interacting With The Open Tree Of Life</em></a></li>
+      <li><a href="#example-1-chiroptera-families">Example 1: Chiroptera Families</a></li>
+      <li><a href="#example-2-five-chiroptera-taxa-that-i-like">Example 2 : Five Chiroptera Taxa That I Like</a></li>
+      <li><a href="#example-3-all-the-chiroptera">Example 3: All the Chiroptera!</a></li>
+      <li><a href="#updating-a-chiroptera-chronogram-with-python">Updating a Chiroptera chronogram with Python</a></li>
       </ul>
 </li>
-      <li><a href="#r-studio-code"><em>R Studio Code</em></a></li>
-      <li><a href="#running-python">Running python</a></li>
       <li><a href="#reproducibility">Reproducibility</a></li>
       <li><a href="#attributions">Attributions</a></li>
       </ul>
