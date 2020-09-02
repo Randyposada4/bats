@@ -269,6 +269,7 @@ names(chiroptera_dr)
 We have 7 studies in OpenTree with ages for the Chiroptera. The code above provided all references of the seven studies as an output.
 
 To get the actual chronograms we need to run another function:
+
 ```{r getting_phylo_all, eval=FALSE, warning=FALSE, message=FALSE}
 chiroptera_phylo_all <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_all")
 # We will write this object into a file, bc it takes a long time to run
@@ -282,13 +283,16 @@ load("../data/chiroptera_phylo_all.RData")
 ```
 
 The following function will allow us to plot the Tree with the ages.
+
 ```{r Tree_With_Ages, warning=FALSE, message=FALSE}
 datelife::plot_phylo_all(trees = chiroptera_phylo_all, write="pdf")
 ```
+
 However, they are quite large, so we will not show them here for now.
 
 Summarizing node ages is slow so we will save the output of `datelife::summarize_datelife_result` in the data folder.
 This function summarizes the node information from all the chronograms in chiroptera_phylo_all.
+
 ```{r Node_age_Summary, eval=FALSE}
 chiroptera_phylo_median <-  datelife::summarize_datelife_result(chiroptera_dr, summary_format = "phylo_median")
 
@@ -323,7 +327,8 @@ rmarkdown::render("vignettes/report.Rmd", output_format="pdf_document")
 ```
 
 # Attributions
-[bat image](https://unsplash.com/photos/hNz4Qh9ECCc)
 
+[bat image](https://unsplash.com/photos/hNz4Qh9ECCc)
+[Open Tree of Life](https://tree.opentreeoflife.org/opentree/argus/opentree12.3@ott93302)
 add link to OTL
 and references
