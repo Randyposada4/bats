@@ -10,10 +10,11 @@ theme: Sandstone
 ---
 
 ***
-#### *Randy Posada*, Luna L. Sanchez-Reyes, Emily Jane McTavish
+#### *Randy Posada*
+#### Advisors: Luna L. Sanchez-Reyes, Emily Jane McTavish
 #### McTavish Lab
-
-#### UC Merced
+#### School of Natural Sciences
+#### University of California, Merced
 
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
